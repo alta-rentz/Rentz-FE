@@ -2,8 +2,19 @@ import './navbar.scss';
 import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { ImLocation } from 'react-icons/im'
 import { Dropdown, Button } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Navbar = () => {
+  const [city, updateCity] = useState(null);
+
+  useEffect(() => {
+      axios.get(" http://localhost:3004/city")
+      .then(({data}) => {
+        console.log(data);
+      })
+  }, [axios])
+
   return (
     <>
       <div className="c-navbar">
