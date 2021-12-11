@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+.container > form {
+  width: 70%;
+  border: 1px solid #dfdfdf;
+  padding: 20px;
+  border-radius: 5px;
+  background: #fff;
+  input {
+    width: 100%;
+  }
+}
+
+.navigateToLogin {
+  color: blue;
+  text-decoration: underline blue;
+  cursor: pointer;
+  font-size: 14px;  
+}
+
+.btn-register {
+  width: 100%;
+  border: #FF8C00;
+  background: #FF8C00;
+}
+p {
+  color: red;
+}

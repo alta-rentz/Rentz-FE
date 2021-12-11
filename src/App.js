@@ -7,12 +7,15 @@ import {
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Home from './view/home';
+import Register from './view/Register/Register';
+// import Register from './view/Register.jsx';
 
 const App = () => {
   return (
     <BrowserRouter>
     <Navbar />
     <Routes>
+    <Route path="/Register" element={<Register />} />
       <Route path="/" element={<Home />} />
     </Routes>
     <Footer />
