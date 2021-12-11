@@ -2,6 +2,20 @@ import './navbar.scss';
 import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { ImLocation } from 'react-icons/im'
 import { Dropdown, Button } from 'react-bootstrap';
+
+// import { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
+
+const Navbar = () => {
+  const navigate = useNavigate();
+
+  const goRegister = () => {
+    navigate('/Register')
+  };
+  const goLogin = () => {
+    navigate('/SignIn')
+  };
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -14,6 +28,7 @@ const Navbar = () => {
         console.log(data);
       })
   }, [axios])
+
 
   return (
     <>
@@ -41,8 +56,8 @@ const Navbar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
-              <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Register</Dropdown.Item>
+              <Dropdown.Item href="#/action-1" onClick={goLogin}>Login</Dropdown.Item>
+              <Dropdown.Item href="#/action-2" onClick={goRegister}>Register</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>

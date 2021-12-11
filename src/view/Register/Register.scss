@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+}
+.reg-icon {
+  margin-left: 40%;
+  font-size: 70px;
+  align-items: center;
+}
+h4{
+  align-items: center;
+  margin-left: 35%;
+}
+.container > form {
+  width: 70%;
+  border: 1px solid #dfdfdf;
+  padding: 20px;
+  border-radius: 5px;
+  background: #fff;
+  input {
+    width: 100%;
+  }
+}
+
+.navigateToLogin {
+  color: blue;
+  text-decoration: underline blue;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 85%;  
+}
+
+.btn-register {
+  width: 100%;
+  border: #FF8C00;
+  background: #FF8C00;
+}
+p {
+  color: red;
+}
