@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 import "./Register.scss";
+import {MdAccountCircle} from 'react-icons/md'
+import {useNavigate} from 'react-router-dom';
 
 function Register() {
   const initialValues = { username: "", email: "", noHP: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const navigate = useNavigate();
+
+  const goLogin = () => {
+    navigate('/SignIn')
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -72,15 +79,16 @@ function Register() {
   };
 
   return (
-    <div className="container">
+    <div className="container pt-5">
       {Object.keys(formErrors).length === 0 && isSubmit ? (
-        <div className="ui message success" style={{color:"green"}}>Signed in successfully</div>
+        <div className="ui message success" style={{color:"green"}}>Register successfully</div>
       ) : (
         <div></div>
       )}
 
       <form onSubmit={handleSubmit}>
-        <h1>Register Form</h1>
+        <MdAccountCircle className="reg-icon" style={{color:"orange"}}/>
+        <h4>Register</h4>
         <div className="ui divider"></div>
         <div className="ui form">
           <div className="field">
@@ -127,7 +135,7 @@ function Register() {
             />
           </div>
           <p>{formErrors.password}</p>
-          <div className="navigateToLogin">Login</div>
+          <div className="navigateToLogin" onClick={goLogin}>Sign in</div>
           <button className="btn-register" style={{color:"white"}}>Submit</button>
         </div>
       </form>

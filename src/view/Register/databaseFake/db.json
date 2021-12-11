@@ -1,9 +1,0 @@
-{
-  "register": [
-    { "username": "Abi_7777", "email": "abi7@mail.com", "noHP": "0888899990", "password": "12345678" }
-  ],
-  "login": [
-    { "name": "Abi_7777", "email": "abi7@mail.com"}
-  ],
-  "profile": { "name": "typicode" }
-}

@@ -11,6 +11,9 @@ const Navbar = () => {
   const goRegister = () => {
     navigate('/Register')
   };
+  const goLogin = () => {
+    navigate('/SignIn')
+  };
 
   return (
     <>
@@ -38,7 +41,7 @@ const Navbar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
-              <Dropdown.Item href="#/action-1">Login</Dropdown.Item>
+              <Dropdown.Item href="#/action-1" onClick={goLogin}>Login</Dropdown.Item>
               <Dropdown.Item href="#/action-2" onClick={goRegister}>Register</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
