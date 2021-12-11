@@ -8,8 +8,8 @@
 
   .page-home {
     width: 1300px;
-    height: 90vh;
     margin-top: 50px;
+    margin-bottom: 100px;
 
     .category-home {
       display: flex;
@@ -34,6 +34,12 @@
       }
     }
 
+    .page-list-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
 
     .page-list{
       margin-top: 50px;
@@ -49,19 +55,49 @@
       flex-wrap: wrap;
 
     .cards {
+      background-color: #000530;
       width: 240px;
       height: 250px;
       border: 1px solid #c5c5c5;
       margin: 10px 10px;
       border-radius: 8px;
+      box-shadow: 0 3px 6px #c5c5c5;
       cursor: pointer;
+
+      img {
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+      }
+
+      .name-product{
+        margin-top: 10px;
+        text-align: center;
+        font-weight: bold;
+        color: #ffffff;
+      }
     }
+
+    
   }
 
   .load {
+    height: 40px;
     display: flex;
     justify-content: center;
     margin-top: 30px;
+    
+
+    .btn-load {
+      border: 1px solid #000530;
+      background-color: #ffffff;
+      color: #000530;
+      font-weight: bold;
+    }
+
+    .btn-load:hover {
+      border: 3px solid;
+      padding: 0 10px;
+    }
   }
 }
 
@@ -69,3 +105,11 @@
 
 
 }
+
+.dropdown-kategori {
+  width: 298px;
+  box-shadow: 0 3px 6px #c5c5c5;
+  z-index: 1;
+}
+
+
