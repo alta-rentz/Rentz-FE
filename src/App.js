@@ -17,10 +17,12 @@ const App = () => {
     <BrowserRouter>
     <Navbar />
     <Routes>
+    <Route index  path="/" element={<Home />} />
     <Route path="/masuk" element={<Masuk />} />
     <Route path="/daftar" element={<Daftar />} />
-    <Route path="/detail/:id" element={<Detail />} />
-    <Route path="/" element={<Home />} />
+    <Route path="/detail" element={<Detail />} >
+    <Route path=":detailId" element={<Detail />} />
+    </Route>
     </Routes>
     <Footer />
   </BrowserRouter>

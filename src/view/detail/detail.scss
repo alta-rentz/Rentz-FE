@@ -111,9 +111,7 @@
         border: 1px solid #d6d5d5;
         box-shadow: 0 3px 6px #b4b4b4;
 
-        .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
-          padding: 8px;
-        }
+       
       }
 
       .rent-info {
@@ -213,6 +211,10 @@
       }
     }
   }
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 8px!important;
 }
 
 .slick-dots {

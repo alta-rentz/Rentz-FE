@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import addWeeks from 'date-fns/addWeeks';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateRangePicker from '@mui/lab/DateRangePicker';
 import Box from '@mui/material/Box';
@@ -19,6 +20,10 @@ const Detail = () => {
   const [value, setValue] = useState([date, date]);
   const [lat, latUpdate] = useState(3.613548);
   const [long, longUpdate] = useState(98.694574);
+
+  function getWeeksAfter(date, amount) {
+    return date ? addWeeks(date, amount) : undefined;
+  }
 
   const settings = {
     dots: true,
@@ -63,7 +68,7 @@ const Detail = () => {
               <DateRangePicker
                 disablePast
                 value={value}
-                // maxDate={getWeeksAfter(value[0], 4)}
+                maxDate={getWeeksAfter(value[0], 2)}
                 onChange={(newValue) => {
                   setValue(newValue);
                 }}
@@ -88,7 +93,7 @@ const Detail = () => {
             </div>
           </div>
           <div className='desc-user'>
-            <h5>Deskripsi Perental</h5>
+            <h5>Deskripsi Pemilik</h5>
             <div className='info-user'>
               <FaUserCircle size="60px" style={{ color : "grey" }}/>
               <div className='text-user'>
@@ -100,7 +105,7 @@ const Detail = () => {
             </div>
           </div>
           <div className='map-info'>
-            <h5>Lokasi</h5>
+            <h5>Lokasi Pemilik</h5>
             <iframe title="maps" src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9488.49773320645!2d${long}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sid!4v1638703519135!5m2!1sen!2sid`} width="100%" height="250" style={{ border : "1px solid #d6d5d5", borderRadius : "8px" }}  allowfullscreen="" loading="lazy"></iframe>
           </div>
         </div>

@@ -1,60 +1,99 @@
 import { useState } from "react";
 import {MdAccountCircle} from 'react-icons/md'
 import { useNavigate } from "react-router-dom";
+import { Form, Spinner } from 'react-bootstrap';
 import "./signIn.scss";
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function SignIn() {
   const navigate = useNavigate();
-  const initialValues = { email: "", password: "" };
-  const [formValues, setFormValues] = useState(initialValues);
+  const [email, emailUpdate]         = useState("");
+  const [password, passwordUpdate]   = useState("");
+  const [loading, setLoading]        = useState(false);
+  const arrEmail = email.split("");
+  const checkEmail = arrEmail.find((el) => el === "@");
+  const checkEmail2 = arrEmail.find((el) => el === ".");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
-  };
+  const handleSubmit =  (e) => { 
+    e.preventDefault();
+    setLoading(true);
+      if (email.length === 0 || !checkEmail || !checkEmail2) {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          text: 'Email tidak boleh kosong',
+        }).then(() => { setLoading(false); })
+      
+      }else {
+    if (password.length < 5 ) {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      text: 'Kata sandi tidak boleh kurang dari 5 karakter',
+    }).then(() => { setLoading(false); })
+    }else {
+               const objLogin = {
+                  "email": email,
+                  "password": password
+                }
 
-  const goSignIn = () => {
-    navigate('/Daftar')
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();       
-  };
+                 axios.post('https://rentz-id.site/signin', objLogin )
+                .then(({data}) => {
+                  console.log(data);
+                  localStorage.setItem("token", data.data.Token);
+                  localStorage.setItem("userId", data.data.ID);
+                  localStorage.setItem("userName", data.data.Nama);
+                  localStorage.setItem("email", data.data.Email);
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: "Anda telah login",
+                    showConfirmButton: false,
+                    timer: 1500
+                  }).then((result) => {
+                    navigate('/')
+                  })
+                }).catch((err)=>{
+                
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Email sudah terdaftar'
+                  }).then(() => { setLoading(false);})
+                }).finally(() => {
+                  setLoading(false);
+                });
+           }  
+         } 
+      }
+      
+  
 
   return (
-    <div className="SignIn-container pt-5">
-      <form onSubmit={handleSubmit}>
-        <MdAccountCircle className="SignIn-icon" style={{color:"orange"}}/>
-        <h4>Sign in</h4>
-        <div className="ui divider"></div>
-        <div className="ui form">
-          <div className="field pb-3">
-            <label>Email</label>
-            <input
-              type="text"
-              name="email"
-              placeholder="Email"
-              value={formValues.email}
-              onChange={handleChange}
-            />
-          </div>
-          {/* <p>{formErrors.email}</p> */}
-          <div className="field pb-3">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formValues.password}
-              onChange={handleChange}
-            />
-          </div>
-          {/* <p>{formErrors.password}</p> */}
-          <div className="navigateToRegister" onClick={goSignIn}>Register</div>
-          <button className="btn-SignIn" style={{color:"white"}}>Submit</button>
-        </div>
-      </form>
-    </div>
+    <div className="container pt-5">
+    <Form   onSubmit={(e) => handleSubmit(e)}>
+    <MdAccountCircle className="reg-icon" style={{color:"orange"}}/>
+    <h4>Masuk</h4>
+ 
+    <Form.Group >
+      <Form.Control id="email" className="p-3 b-mid-signup " type="email" placeholder="Email" 
+        onChange={(e) => emailUpdate(e.target.value) }
+      />
+    </Form.Group>
+    <Form.Group className=" mb-4" >
+      <Form.Control className="mb-1 p-3 b-top-signup" type="password" placeholder="Kata Sandi" 
+        onChange={(e) => passwordUpdate(e.target.value) }
+        
+      />
+      <p className="href" onClick={() => navigate('/daftar')}><u>Daftar</u> </p>
+    </Form.Group>
+    
+    <button className=" mb-1 p-2 btn-submit" type="submit">
+      {loading && <Spinner animation="border" variant="light" />}
+      {!loading && <span>Lanjutkan</span>}
+    </button>
+    </Form>
+</div>
   );
 }
 

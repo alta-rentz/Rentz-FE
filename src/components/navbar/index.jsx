@@ -9,6 +9,9 @@ import {useNavigate} from 'react-router-dom';
 const Navbar = () => {
   const [city, updateCity] = useState(null);
   const navigate = useNavigate();
+  const [isLogin, updateLogin] = useState(false);
+
+  console.log(isLogin);
 
   // useEffect(() => {
   //     axios.get(" http://localhost:3004/city")
@@ -17,12 +20,25 @@ const Navbar = () => {
   //     })
   // }, [axios])
 
+  const login = () => {
+    const localStore = localStorage.getItem("token");
+    if(localStore){
+    updateLogin(true)
+    }
+  }
+
+  const logout = () => {
+    localStorage.clear();
+    updateLogin(false)
+  }
     const goRegister = () => {
       navigate('/daftar')
     };
     const goLogin = () => {
       navigate('/masuk')
     };
+
+    
 
   return (
     <>
@@ -44,14 +60,15 @@ const Navbar = () => {
             </Dropdown.Menu>
           </Dropdown>
         <div className="user-icon">
-        <Dropdown className= "dropdown-none">
+        <Dropdown className= "dropdown-none" onClick={login}>
             <Dropdown.Toggle className="dropdown-user" id="dropdown-basic">
             <FaUserCircle size="35px"/>
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
-            <Dropdown.Item onClick={goRegister}>Daftar</Dropdown.Item>
-              <Dropdown.Item onClick={goLogin}>Masuk</Dropdown.Item>
+            {isLogin && <span ><Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item></span>}
+          {!isLogin && <span><Dropdown.Item onClick={goRegister}>Daftar</Dropdown.Item>
+            <Dropdown.Item onClick={goLogin}>Masuk</Dropdown.Item></span>}
             </Dropdown.Menu>
           </Dropdown>
         </div>
