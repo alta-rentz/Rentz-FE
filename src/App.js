@@ -7,8 +7,9 @@ import {
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import Home from './view/home';
-import Register from './view/Register/Register';
-import SignIn from './view/SignIn/signIn';
+import Daftar from './view/Register/Register';
+import Masuk from './view/SignIn/signIn';
+import Detail from './view/detail';
 // import Register from './view/Register.jsx';
 
 const App = () => {
@@ -16,9 +17,10 @@ const App = () => {
     <BrowserRouter>
     <Navbar />
     <Routes>
-    <Route path="/SignIn" element={<SignIn />} />
-    <Route path="/Register" element={<Register />} />
-      <Route path="/" element={<Home />} />
+    <Route path="/masuk" element={<Masuk />} />
+    <Route path="/daftar" element={<Daftar />} />
+    <Route path="/detail/:id" element={<Detail />} />
+    <Route path="/" element={<Home />} />
     </Routes>
     <Footer />
   </BrowserRouter>

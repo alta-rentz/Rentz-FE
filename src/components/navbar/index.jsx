@@ -2,45 +2,39 @@ import './navbar.scss';
 import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { ImLocation } from 'react-icons/im'
 import { Dropdown, Button } from 'react-bootstrap';
-
-// import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 
 const Navbar = () => {
+  const [city, updateCity] = useState(null);
   const navigate = useNavigate();
 
-  const goRegister = () => {
-    navigate('/Register')
-  };
-  const goLogin = () => {
-    navigate('/SignIn')
-  };
+  // useEffect(() => {
+  //     axios.get(" http://localhost:3004/city")
+  //     .then(({data}) => {
+  //       console.log(data);
+  //     })
+  // }, [axios])
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const Navbar = () => {
-  const [city, updateCity] = useState(null);
-
-  useEffect(() => {
-      axios.get(" http://localhost:3004/city")
-      .then(({data}) => {
-        console.log(data);
-      })
-  }, [axios])
-
+    const goRegister = () => {
+      navigate('/daftar')
+    };
+    const goLogin = () => {
+      navigate('/masuk')
+    };
 
   return (
     <>
       <div className="c-navbar">
         <div className="page-navbar">
-          <div className="logo">Rentz.ID</div>
+          <div className="logo" onClick={() => navigate('/')}>Rentz.ID</div>
           <div className="search-navbar">
-            <input type="text" placeholder="Rent camera, book ..."/>
+            <input type="text" placeholder="Rental kamera, Buku ..."/>
             <Button className="btn-search">< FaSearch /></Button>
             <Dropdown>
             <Dropdown.Toggle className="dropdown-navbar" id="dropdown-basic">
-              <ImLocation style={{ color : "#FF8C00" }}/> Location
+              <ImLocation style={{ color : "#FF8C00" }}/> Lokasi
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
@@ -56,8 +50,8 @@ const Navbar = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
-              <Dropdown.Item href="#/action-1" onClick={goLogin}>Login</Dropdown.Item>
-              <Dropdown.Item href="#/action-2" onClick={goRegister}>Register</Dropdown.Item>
+            <Dropdown.Item onClick={goRegister}>Daftar</Dropdown.Item>
+              <Dropdown.Item onClick={goLogin}>Masuk</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>

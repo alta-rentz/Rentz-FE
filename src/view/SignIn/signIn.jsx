@@ -14,7 +14,7 @@ function SignIn() {
   };
 
   const goSignIn = () => {
-    navigate('/Register')
+    navigate('/Daftar')
   };
 
   const handleSubmit = (e) => {
