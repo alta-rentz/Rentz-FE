@@ -42,7 +42,7 @@ function Register() {
           text: 'Nomor HP tidak boleh kosong',
         }).then(() => { setLoading(false); })
       }else{
-        if ( phone.length < 11 || phone[0] !== 0 || phone[1] !== 8) {
+        if ( phone.length < 11 || phone[0] != 0 || phone[1] != 8) {
           Swal.fire({
             position: 'center',
             icon: 'error',
@@ -64,19 +64,19 @@ function Register() {
             }
               
        axios.post("https://rentz-id.site/signup", objInput  )
-       .then(({data}) => {
+       .then(() => {
        
                 const objLogin = {
                   "email": email,
                   "password": password
                 }
 
-                return axios.post('https://rentz-id.site/signup', objLogin )
+                return axios.post('https://rentz-id.site/signin', objLogin )
                 .then(({data}) => {
-                  localStorage.setItem("token", data.Data.Token);
-                  localStorage.setItem("userId", data.Data.ID);
-                  localStorage.setItem("userName", data.Data.Name);
-                  localStorage.setItem("email", email);
+                  localStorage.setItem("token", data.data.Token);
+                  localStorage.setItem("userId", data.data.ID);
+                  localStorage.setItem("userName", data.data.Nama);
+                  localStorage.setItem("email", data.data.Email);
                   Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -84,7 +84,7 @@ function Register() {
                     showConfirmButton: false,
                     timer: 1500
                   }).then((result) => {
-                  
+                    navigate('/')
                   })
                 })
 
