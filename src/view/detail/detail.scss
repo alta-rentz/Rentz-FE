@@ -126,9 +126,10 @@
         box-shadow: 0 3px 6px #b4b4b4;
 
         .c-one{
-          h3 {
+          h4 {
             color: #002f34;
             font-weight: bold;
+            margin: 0;
           }
 
           p {
@@ -213,7 +214,7 @@
   }
 }
 
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+.MuiOutlinedInput-input {
   padding: 8px!important;
 }
 

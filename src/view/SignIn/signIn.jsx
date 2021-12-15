@@ -14,6 +14,8 @@ function SignIn() {
   const arrEmail = email.split("");
   const checkEmail = arrEmail.find((el) => el === "@");
   const checkEmail2 = arrEmail.find((el) => el === ".");
+  let locationPathName = window.location.pathname;
+  let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
 
   const handleSubmit =  (e) => { 
     e.preventDefault();
@@ -26,11 +28,11 @@ function SignIn() {
         }).then(() => { setLoading(false); })
       
       }else {
-    if (password.length < 5 ) {
+    if (password.length === 0 ) {
     Swal.fire({
       position: 'center',
       icon: 'error',
-      text: 'Kata sandi tidak boleh kurang dari 5 karakter',
+      text: 'Kata sandi tidak boleh kosong',
     }).then(() => { setLoading(false); })
     }else {
                const objLogin = {
@@ -40,7 +42,6 @@ function SignIn() {
 
                  axios.post('https://rentz-id.site/signin', objLogin )
                 .then(({data}) => {
-                  console.log(data);
                   localStorage.setItem("token", data.data.Token);
                   localStorage.setItem("userId", data.data.ID);
                   localStorage.setItem("userName", data.data.Nama);
@@ -52,13 +53,17 @@ function SignIn() {
                     showConfirmButton: false,
                     timer: 1500
                   }).then((result) => {
-                    navigate('/')
+                    if(locationPathName === `/masuk/${pathName}`){
+                      navigate(`/detail/${pathName}`)
+                    }else{
+                      navigate('/')
+                    }
                   })
                 }).catch((err)=>{
-                
+                  
                   Swal.fire({
                     icon: 'error',
-                    title: 'Email sudah terdaftar'
+                    title: 'Email / Kata sandi salah'
                   }).then(() => { setLoading(false);})
                 }).finally(() => {
                   setLoading(false);
@@ -72,16 +77,15 @@ function SignIn() {
   return (
     <div className="container pt-5">
     <Form   onSubmit={(e) => handleSubmit(e)}>
-    <MdAccountCircle className="reg-icon" style={{color:"orange"}}/>
+    <MdAccountCircle className="reg-icon" style={{color:"#046c91"}}/>
     <h4>Masuk</h4>
- 
     <Form.Group >
       <Form.Control id="email" className="p-3 b-mid-signup " type="email" placeholder="Email" 
         onChange={(e) => emailUpdate(e.target.value) }
       />
     </Form.Group>
     <Form.Group className=" mb-4" >
-      <Form.Control className="mb-1 p-3 b-top-signup" type="password" placeholder="Kata Sandi" 
+      <Form.Control  id="password" className="mb-1 p-3 b-top-signup" type="password" placeholder="Kata Sandi" 
         onChange={(e) => passwordUpdate(e.target.value) }
         
       />
@@ -90,7 +94,7 @@ function SignIn() {
     
     <button className=" mb-1 p-2 btn-submit" type="submit">
       {loading && <Spinner animation="border" variant="light" />}
-      {!loading && <span>Lanjutkan</span>}
+      {!loading && <span>Masuk</span>}
     </button>
     </Form>
 </div>

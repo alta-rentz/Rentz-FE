@@ -14,17 +14,26 @@ import './detail.scss';
 import a from '../../images/kamera1.jpg';
 import b from '../../images/kamera2.jpg';
 import Fade from '@mui/material/Fade';
+import AddCart from '../add-cart';
+import CheckLogin from '../../components/checkLogin';
 
 const Detail = () => {
   const date = new Date();
   const [value, setValue] = useState([date, date]);
-  const [lat, latUpdate] = useState(3.613548);
-  const [long, longUpdate] = useState(98.694574);
+  const [lat] = useState(3.613548);
+  const [long] = useState(98.694574);
+  const [isLogin, updateLogin] = useState(false);
+  const getToken = localStorage.getItem("token");
 
   function getWeeksAfter(date, amount) {
     return date ? addWeeks(date, amount) : undefined;
   }
 
+  useEffect(() => {
+    if(getToken){
+      updateLogin(true);
+    }
+  },[getToken])
   const settings = {
     dots: true,
     infinite: true,
@@ -84,12 +93,14 @@ const Detail = () => {
           </div>
           <div className='rent-info'>
             <div className='c-one'>
-              <h3>Rp.250.000 / hari</h3>
+              <h4>Rp.250.000 / hari</h4>
               <p>Kamera Canon</p>
               <p>Medan, Sumatra Utara, Indonesia</p>
             </div>
             <div className='c-two'>
-                <button>Rental</button>
+              {isLogin && < AddCart/>}
+              {!isLogin && <CheckLogin />}  
+              
             </div>
           </div>
           <div className='desc-user'>
@@ -106,7 +117,7 @@ const Detail = () => {
           </div>
           <div className='map-info'>
             <h5>Lokasi Pemilik</h5>
-            <iframe title="maps" src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9488.49773320645!2d${long}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sid!4v1638703519135!5m2!1sen!2sid`} width="100%" height="250" style={{ border : "1px solid #d6d5d5", borderRadius : "8px" }}  allowfullscreen="" loading="lazy"></iframe>
+            <iframe title="maps" src={`https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d9488.49773320645!2d${long}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sid!4v1638703519135!5m2!1sen!2sid`} width="100%" height="250" style={{ border : "1px solid #d6d5d5", borderRadius : "8px" }} loading="lazy"></iframe>
           </div>
         </div>
 

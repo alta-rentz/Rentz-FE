@@ -6,7 +6,7 @@
   width: 100%;
   box-shadow: rgb(0 0 0 / 8%) 0px 1px 10px;
   font-family: 'Roboto', sans-serif;
-  background-color: #ffffff;
+  background-color: #046C91;
   z-index: 999;
 
   .page-navbar {
@@ -19,7 +19,7 @@
     .logo {
       font-size: 25px;
       font-weight: bold;
-      color: #FF8C00;
+      color: #C7D3E3;
       cursor: pointer;
     }
 
@@ -39,13 +39,14 @@
       }
 
       .btn-search {
-        padding: 10px 20px;
+        padding: 10.5px 20px;
         border: none;
         border-radius: 0;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         margin-right: 50px;
-        background-color: #FF8C00;
+        background-color: #C7D3E3;
+        color: #046C91;
       }
 
       .dropdown-navbar {
@@ -57,7 +58,7 @@
       }
 
       .dropdown-user {
-        background-color: #ffffff;
+        background-color: #046C91;
         color: #797979;
         border: none;
         padding: 0;
@@ -76,4 +77,40 @@
       color: #797979;
     }
   }
+}
+
+.dropdown-menu {
+  min-width: 15rem;
+  margin-top: 5px;
+  box-shadow: 0 3px 10px #c5c5c5;
+
+}
+
+.dropdown-item:active {
+  background-color: #C7D3E3;
+}
+
+.dot {
+  position: absolute;
+  top: -1px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border:1px solid #025979;
+  border-radius: 20px;
+  background-color: #00ac00;
+}
+
+.user-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  width: 40px;
+  height: 40px;
+  border:3px solid #024057;
+  border-radius: 50px;
+  background-color: #C7D3E3;
+  color: #046C91;
+  
 }

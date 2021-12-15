@@ -3,33 +3,36 @@ import { FaUserCircle, FaSearch } from 'react-icons/fa';
 import { ImLocation } from 'react-icons/im'
 import { Dropdown, Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
+import brand from '../../images/logo.png';
 
 const Navbar = () => {
-  const [city, updateCity] = useState(null);
   const navigate = useNavigate();
   const [isLogin, updateLogin] = useState(false);
+  const [name, updateName] = useState("")
+  const getToken = localStorage.getItem("token");
+  const getName = localStorage.getItem("userName");
 
-  console.log(isLogin);
-
-  // useEffect(() => {
-  //     axios.get(" http://localhost:3004/city")
-  //     .then(({data}) => {
-  //       console.log(data);
-  //     })
-  // }, [axios])
-
-  const login = () => {
-    const localStore = localStorage.getItem("token");
-    if(localStore){
-    updateLogin(true)
-    }
-  }
+  useEffect(() => {
+    if(getToken){
+      updateLogin(true)
+      updateName(getName)
+      }
+  },[getToken, getName]);
 
   const logout = () => {
     localStorage.clear();
-    updateLogin(false)
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: "Anda telah keluar",
+      showConfirmButton: false,
+      timer: 1500
+    }).then((result) => {
+      navigate('/');
+      updateLogin(false)
+    })
   }
     const goRegister = () => {
       navigate('/daftar')
@@ -44,13 +47,13 @@ const Navbar = () => {
     <>
       <div className="c-navbar">
         <div className="page-navbar">
-          <div className="logo" onClick={() => navigate('/')}>Rentz.ID</div>
+          <div className="logo" onClick={() => navigate('/')}> <img src={brand} alt="" width="140px"/></div>
           <div className="search-navbar">
             <input type="text" placeholder="Rental kamera, Buku ..."/>
             <Button className="btn-search">< FaSearch /></Button>
             <Dropdown>
             <Dropdown.Toggle className="dropdown-navbar" id="dropdown-basic">
-              <ImLocation style={{ color : "#FF8C00" }}/> Lokasi
+              <ImLocation style={{ color : "#046c91" }}/> Lokasi
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
@@ -60,13 +63,18 @@ const Navbar = () => {
             </Dropdown.Menu>
           </Dropdown>
         <div className="user-icon">
-        <Dropdown className= "dropdown-none" onClick={login}>
+        <Dropdown className= "dropdown-none" >
             <Dropdown.Toggle className="dropdown-user" id="dropdown-basic">
-            <FaUserCircle size="35px"/>
+             {isLogin && <><div className='dot'></div><div className='user-login'>{name[0].toLocaleUpperCase()}</div></>} 
+             {!isLogin && <FaUserCircle style={{ color : "#C7D3E3" }} size="40px"/>} 
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
-            {isLogin && <span ><Dropdown.Item onClick={() => logout()}>Logout</Dropdown.Item></span>}
+            {isLogin && <>
+            <span ><Dropdown.Item onClick={() => navigate('/profil')}>Profil</Dropdown.Item></span>
+            <span ><Dropdown.Item onClick={() => navigate('/keranjang')}>Keranjang</Dropdown.Item></span>
+            <span ><Dropdown.Item style={{ color : "red" }} onClick={() => logout()}>Logout</Dropdown.Item></span>
+            </>}
           {!isLogin && <span><Dropdown.Item onClick={goRegister}>Daftar</Dropdown.Item>
             <Dropdown.Item onClick={goLogin}>Masuk</Dropdown.Item></span>}
             </Dropdown.Menu>
