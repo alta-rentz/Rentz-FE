@@ -8,7 +8,6 @@
 
   .page-home {
     width: 1300px;
-    margin-top: 50px;
     margin-bottom: 100px;
 
     .category-home {
@@ -55,25 +54,32 @@
       flex-wrap: wrap;
 
     .cards {
-      background-color: #046C91;
+     
       width: 240px;
       height: 250px;
       border: 1px solid #c5c5c5;
       margin: 10px 10px;
-      border-radius: 8px;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
       box-shadow: 0 3px 6px #c5c5c5;
       cursor: pointer;
 
-      img {
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
+      .img-products {
+        height: 200px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background-color: #ffffff;
       }
 
       .name-product{
-        margin-top: 10px;
+        background-color: #046C91;
+        height: 50px;
+        padding-top: 10px;
         text-align: center;
         font-weight: bold;
         color: #ffffff;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
       }
     }
 

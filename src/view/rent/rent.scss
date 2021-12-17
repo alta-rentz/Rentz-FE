@@ -1,0 +1,49 @@
+.c-rent{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 92vh;
+  background-color: #f0f3f5;
+
+  .page-rent {
+    width: 1000px;
+    height: 550px;
+    margin-top: 100px;
+    padding: 40px 30px 30px 30px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px #b4b4b4;
+
+    h5 {
+      display: flex;
+      align-items: center;
+    }
+
+    .form-rent{
+     
+      margin-top: 30px;
+
+      .form-control {
+        margin-bottom: 25px;
+      }
+
+      .form-one{
+        display: flex;
+        
+        .form-left {
+          width: 48%;
+          margin-right: 4%;
+        }
+
+        .form-right{
+          width: 48%;
+        }
+    }
+    }
+  }
+}
+
+textarea {
+  resize: none;
+  height: 174px;
+}

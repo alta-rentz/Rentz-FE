@@ -73,6 +73,7 @@ const Navbar = () => {
             {isLogin && <>
             <span ><Dropdown.Item onClick={() => navigate('/profil')}>Profil</Dropdown.Item></span>
             <span ><Dropdown.Item onClick={() => navigate('/keranjang')}>Keranjang</Dropdown.Item></span>
+            <span ><Dropdown.Item onClick={() => navigate('/produk')}>Rental Produk</Dropdown.Item></span>
             <span ><Dropdown.Item style={{ color : "red" }} onClick={() => logout()}>Logout</Dropdown.Item></span>
             </>}
           {!isLogin && <span><Dropdown.Item onClick={goRegister}>Daftar</Dropdown.Item>

@@ -14,8 +14,13 @@ function Register() {
   const [password, passwordUpdate]   = useState("");
   const [loading, setLoading]        = useState(false);
   const arrEmail = email.split("");
+  const arrPassword = password.split("");
   const checkEmail = arrEmail.find((el) => el === "@");
   const checkEmail2 = arrEmail.find((el) => el === ".");
+  const checkPassword = arrPassword.find((el) => el === " ");
+  const trim = userName.trim();
+  const indexOf = userName.indexOf(trim[0]);
+  const sliceName = userName.slice(0, indexOf);
   let locationPathName = window.location.pathname;
   let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
 
@@ -26,14 +31,21 @@ function Register() {
       Swal.fire({
         position: 'center',
         icon: 'error',
-        text: 'Username tidak boleh kosong',
+        text: 'Nama tidak boleh kosong',
       }).then(() => { setLoading(false);})
     }else{
-      if (email.length === 0 || !checkEmail || !checkEmail2) {
+      if (userName === " " || sliceName ) {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          text: 'Email tidak boleh kosong',
+          text: 'Format nama tidak sesuai',
+        }).then(() => { setLoading(false);})
+      }else{
+      if ( !checkEmail || !checkEmail2 || email.length === 0) {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          text: 'Email harus berisi format email',
         }).then(() => { setLoading(false); })
       
       }else {
@@ -50,17 +62,31 @@ function Register() {
             icon: 'error',
             text: 'Nomor HP tidak sesuai',
           }).then(() => { setLoading(false); })
-        }else{
-    if (password.length < 5 ) {
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      text: 'Kata sandi tidak boleh kurang dari 5 karakter',
-    }).then(() => { setLoading(false); })
+      }else{
+        if (password.length === 0 ) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            text: 'Kata sandi tidak boleh kosong',
+          }).then(() => { setLoading(false); })
+      }else {
+      if (checkPassword ) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        text: 'Kata sandi tidak boleh ada karakter spasi',
+      }).then(() => { setLoading(false); })
     }else {
+      if (password.length < 5 ) {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          text: 'Kata sandi tidak boleh kurang dari 5 karakter',
+        }).then(() => { setLoading(false); })
+      }else {
             const objInput = {
-              "nama": userName,
-              "email": email,
+              "nama": userName.trim(),
+              "email": email.trim(),
               "phone": phone,
               "password": password
             }
@@ -96,11 +122,15 @@ function Register() {
                 console.log(err.response);
               Swal.fire({
                 icon: 'error',
-                title: 'Email sudah terdaftar'
+                text: "Email atau No.Telepon sudah terdaftar"
               }).then(() => { setLoading(false);})
             }).finally(() => {
               setLoading(false);
             });
+
+          }
+          }
+          }
         }  
         } 
       }

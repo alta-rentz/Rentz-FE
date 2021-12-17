@@ -1,5 +1,6 @@
 import { FaCheckCircle, FaUserCircle } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -23,11 +24,21 @@ const Detail = () => {
   const [lat] = useState(3.613548);
   const [long] = useState(98.694574);
   const [isLogin, updateLogin] = useState(false);
+  const [detail, updateDetail] = useState("");
   const getToken = localStorage.getItem("token");
+  let locationPathName = window.location.pathname;
+  let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
 
   function getWeeksAfter(date, amount) {
     return date ? addWeeks(date, amount) : undefined;
   }
+
+  useEffect(() => {
+    axios.get(`https://rentz-id.site/products/${pathName}`)
+    .then(({data}) => {
+      updateDetail(data.data)
+    })
+  },[updateDetail])
 
   useEffect(() => {
     if(getToken){
@@ -41,7 +52,7 @@ const Detail = () => {
     slidesToShow: 1,
     slidesToScroll: 1
   };
-
+console.log(detail);
   return (
     <>
      <Fade  in={true}
@@ -63,14 +74,17 @@ const Detail = () => {
           </div>
           <div className='info-detail'>
             <h5>Detail</h5>
+            <p>{detail.Description}</p>
           </div>
           <div className='info-desc'>
           <h5>Deskripsi</h5>
+          <p>Persyaratan untuk merental produk ini</p>
+          <p>KTP Atau SIM</p>
           </div>
         </div>
         <div className='page-two'>
           <div className='available-info'>
-            <h5><FaCheckCircle /> Tersedia untuk di rental 5 buah</h5>
+            <h5><FaCheckCircle /> Tersedia untuk di rental {detail.Stock} buah</h5>
           </div>
           <div className='in-date'>
               <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -93,8 +107,8 @@ const Detail = () => {
           </div>
           <div className='rent-info'>
             <div className='c-one'>
-              <h4>Rp.250.000 / hari</h4>
-              <p>Kamera Canon</p>
+              <h4>Rp.{detail.Price} / hari</h4>
+              <p>{detail.Name}</p>
               <p>Medan, Sumatra Utara, Indonesia</p>
             </div>
             <div className='c-two'>
@@ -122,7 +136,7 @@ const Detail = () => {
         </div>
 
       </div>
-      
+   
     </div>
     </Fade>
     </>

@@ -24,7 +24,7 @@ function SignIn() {
         Swal.fire({
           position: 'center',
           icon: 'error',
-          text: 'Email tidak boleh kosong',
+          text: 'Email harus berisi format email',
         }).then(() => { setLoading(false); })
       
       }else {
@@ -68,6 +68,7 @@ function SignIn() {
                 }).finally(() => {
                   setLoading(false);
                 });
+              
            }  
          } 
       }
