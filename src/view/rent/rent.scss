@@ -2,13 +2,12 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 92vh;
   background-color: #f0f3f5;
 
   .page-rent {
     width: 1000px;
-    height: 550px;
-    margin-top: 100px;
+    margin-top: 60px;
+    margin-bottom: 245px;
     padding: 40px 30px 30px 30px;
     background-color: #ffffff;
     border-radius: 15px;
@@ -24,7 +23,12 @@
       margin-top: 30px;
 
       .form-control {
-        margin-bottom: 25px;
+        margin-top: 25px;
+      }
+
+      .form-select {
+        margin-top: 25px;
+        margin-bottom: 0px!important;
       }
 
       .form-one{
@@ -45,5 +49,85 @@
 
 textarea {
   resize: none;
-  height: 174px;
+  height: 255px;
 }
+
+.photo {
+  position: relative;
+
+  .input-foto{
+    margin-top: 0px!important;
+  }
+
+  .name-photos{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 32px;
+    right: 0px;
+    width: 350px;
+    height: 58px;
+    background-color: white;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-right: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da;
+    border-top: 1px solid #ced4da;
+    overflow-x: overlay;
+
+    .in-name {
+      display: flex;
+      align-items: center;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .remove {
+      border: none;
+      background-color: #c40000;
+      color: white;
+      padding: 0px 5px;
+      border-radius: 5px;
+      margin-left: 5px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  
+  }
+}
+
+ .alerts {
+   position: absolute;
+   padding-left: 2px;
+   font-size: 12px;
+    color: red;
+  }
+
+.btn-submit-addProduct {
+  border: none;
+  width: 84%;
+  margin-right: 1%;
+  margin-top: 30px;
+  background-color: #046c91;
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px #b4b4b4
+}
+
+.btn-cancel-addProduct {
+  border: none;
+  width: 15%;
+  background-color: #c40000;
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px #b4b4b4;
+}
+
+.label-jaminan {
+  display: inline-block;
+  width: 100%;
+  margin-top: 25px;
+}
+

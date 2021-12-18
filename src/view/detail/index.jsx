@@ -12,19 +12,20 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import './detail.scss';
-import a from '../../images/kamera1.jpg';
-import b from '../../images/kamera2.jpg';
 import Fade from '@mui/material/Fade';
 import AddCart from '../add-cart';
 import CheckLogin from '../../components/checkLogin';
+import CheckLoginPhone from '../../components/checkloginphone';
+import { ImPhone } from 'react-icons/im'
 
 const Detail = () => {
   const date = new Date();
   const [value, setValue] = useState([date, date]);
-  const [lat] = useState(3.613548);
-  const [long] = useState(98.694574);
+  const [lat, updateLat] = useState(0);
+  const [long, updateLong] = useState(0);
   const [isLogin, updateLogin] = useState(false);
-  const [detail, updateDetail] = useState("");
+  const [detail, updateDetail] = useState(null);
+  const [isPhone, setIsPhone] = useState(false);
   const getToken = localStorage.getItem("token");
   let locationPathName = window.location.pathname;
   let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
@@ -33,16 +34,22 @@ const Detail = () => {
     return date ? addWeeks(date, amount) : undefined;
   }
 
+  console.log(detail);
+
   useEffect(() => {
     axios.get(`https://rentz-id.site/products/${pathName}`)
     .then(({data}) => {
-      updateDetail(data.data)
+      updateDetail(data.data);
+      updateLat(data.data.Latitude);
+      updateLong(data.data.Longitude);
     })
+
   },[updateDetail])
 
   useEffect(() => {
     if(getToken){
       updateLogin(true);
+      setIsPhone(true);
     }
   },[getToken])
   const settings = {
@@ -52,7 +59,10 @@ const Detail = () => {
     slidesToShow: 1,
     slidesToScroll: 1
   };
-console.log(detail);
+
+  if(detail === null) {
+    return (<></>)
+  }
   return (
     <>
      <Fade  in={true}
@@ -64,12 +74,11 @@ console.log(detail);
         <div className='page-one'>
           <div className='img-detail'>
           <Slider {...settings}>
-          <div className='in-image'>
-            <img src={a} alt="" width="70%" height="100%" />
+          {detail.Url.map((el, i) => 
+          <div className='in-image' key={i}>
+            <img src={el} alt="i" width="70%" height="100%" />
           </div>
-          <div className='in-image'>
-            <img src={b} alt="" width="70%" height="100%"/>
-          </div>
+          )}
         </Slider>
           </div>
           <div className='info-detail'>
@@ -78,8 +87,14 @@ console.log(detail);
           </div>
           <div className='info-desc'>
           <h5>Deskripsi</h5>
-          <p>Persyaratan untuk merental produk ini</p>
-          <p>KTP Atau SIM</p>
+          <p>Persyaratan untuk merental produk ini :</p>
+          <p>
+            {detail.Guarantee.map((el, i) => 
+            <span key={i}>
+             {` ${el} / `} 
+            </span>
+            )}
+          </p>
           </div>
         </div>
         <div className='page-two'>
@@ -122,9 +137,11 @@ console.log(detail);
             <div className='info-user'>
               <FaUserCircle size="60px" style={{ color : "grey" }}/>
               <div className='text-user'>
-                <p>Bambang Setya</p>
+                <p>{detail.Nama}</p>
                 <p><i>Bergabung sejak Jan 2020</i></p>
-                <p>08**-****-****</p>
+                {isPhone && <p><ImPhone/> {detail.Phone_Number}</p>}
+                {!isPhone && <p><ImPhone/> 08**-****-**** <span className='show-phone' ><u>< CheckLoginPhone/></u></span></p> }
+                
                 <p></p>
               </div>
             </div>
