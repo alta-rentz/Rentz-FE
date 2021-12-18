@@ -10,6 +10,23 @@
     width: 1300px;
     margin-bottom: 100px;
 
+    .card-loading {
+      overflow: hidden;
+      width: 1280px;
+      height: 450px;
+      border-radius: 8px;
+    }
+
+    .page-carousel {
+      width: 100%;
+      padding: 20px 10px;
+
+      img {
+        height: 450px;
+        border-radius: 8px;
+      }
+    }
+
     .category-home {
       display: flex;
       align-items: center;
@@ -46,12 +63,18 @@
       h6 {
         margin-left: 10px;
       }
-    
+      
+      .title-loading {
+        width: 150px;
+        height: 25px;
+        margin-left: 10px;
+      }
 
     .card-home {
       display: flex;
       justify-content: flex-start;
       flex-wrap: wrap;
+      overflow: hidden;
 
     .cards {
      
@@ -71,6 +94,10 @@
         background-color: #ffffff;
       }
 
+      .img-products-loading {
+        height: 200px;
+      }
+
       .name-product{
         background-color: #046C91;
         height: 50px;
@@ -78,6 +105,13 @@
         text-align: center;
         font-weight: bold;
         color: #ffffff;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+      
+      .name-product-loading{
+        height: 50px;
+        padding-top: 10px;
         border-bottom-right-radius: 6px;
         border-bottom-left-radius: 6px;
       }
@@ -118,4 +152,35 @@
   z-index: 1;
 }
 
+	/* The loading Class */
+  .loading {
+    position: relative;
+    background-color: #e2e2e2;
+  }
 
+  /* The moving element */
+  .loading::after {
+    display: block;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+    background: -webkit-gradient(linear, left top,
+          right top, from(transparent),
+          color-stop(rgb(255, 255, 255)),
+          to(transparent));
+          
+    background: linear-gradient(90deg, transparent,
+        rgba(255, 255, 255, 0.534), transparent);
+
+    /* Adding animation */
+    animation: loading 1.2s infinite;
+  }
+
+  /* Loading Animation */
+  @keyframes loading {
+    100% {
+      transform: translateX(100%);
+    }
+  }

@@ -10,6 +10,7 @@ import { Spinner } from 'react-bootstrap';
 const Product = () => {
   const navigate = useNavigate();
   const [list, updateList] = useState();
+  const [loading, setLoading] = useState(false);
 
   const headers = {
     "Authorization": 'Bearer ' + localStorage.getItem("token")
@@ -19,14 +20,14 @@ const Product = () => {
 
     axios.get('https://rentz-id.site/jwt/products', {headers: headers})
     .then(({data}) => {
-      console.log(data);
       updateList(data.data);
     }).catch((err) => {
-      console.log(err);
+      setLoading(true)
     })
 
   }, [axios, updateList])
 
+  
   if (list === undefined){
     return (
     <>
@@ -41,12 +42,10 @@ const Product = () => {
             <button onClick={() => navigate('/tambah_produk')}>Tambah</button>
           </div>
         </div>
-     
-        <div className='loading'>
-            <Spinner animation="border"/>
+           <div className='loading-product'>
+             {loading && <p>Product Kosong</p>}
+           {!loading && <Spinner animation="border"/>}
         </div>
-   
-        
       </div>
     </div>
     </>)
