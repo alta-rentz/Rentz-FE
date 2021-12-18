@@ -11,6 +11,7 @@ import Daftar from './view/Register/Register';
 import Masuk from './view/SignIn/signIn';
 import Detail from './view/detail';
 import Cart from './view/cart';
+import Product from './view/product';
 import Rent from './view/rent';
 
 const App = () => {
@@ -29,7 +30,8 @@ const App = () => {
     <Route path=":detailId" element={<Detail />} />
     </Route>
     <Route path="/keranjang" element={<Cart />}/>
-    <Route path="/produk" element={<Rent />}/>
+    <Route path="/produk" element={<Product />}/>
+    <Route path="/tambah_produk" element={<Rent />}/>
     </Routes>
     <Footer />
   </BrowserRouter>

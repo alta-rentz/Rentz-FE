@@ -18,6 +18,7 @@ const Rent = () => {
   const [desc, descUpdate] = useState("");
   const [photo, photoUpdate] = useState([]);
   const [alertName, setAlertName] = useState(false);
+  const [alertName2, setAlertName2] = useState(false);
   const [alertPrice, setAlertPrice] = useState(false);
   const [alertStock, setAlertStock] = useState(false);
   const [alertGuarantee, setAlertGuarantee] = useState(false);
@@ -29,12 +30,17 @@ const Rent = () => {
   const [alertPhoto3, setAlertPhoto3] = useState(false);
   const [alertPhoto4, setAlertPhoto4] = useState(false);
   const [token, tokenUpdate] = useState("");
+  const trim = nameProduct.trim();
+  const indexOf = nameProduct.indexOf(trim[0]);
+  const sliceName = nameProduct.slice(0, indexOf);
+  // const trimDesc = desc.trim();
+  // const indexOfDesc = desc.indexOf(trimDesc[0]);
+  // const sliceDesc = desc.slice(0, indexOfDesc);
 
   useEffect(() => {
     tokenUpdate(localStorage.getItem("token"));
   }, [token]);
 
-  console.log(token);
   const headers = {
     "Authorization": 'Bearer ' + token
 };
@@ -50,8 +56,18 @@ const Rent = () => {
     if(nameProduct === ""){
       setAlertName(true)
       setLoading(false)
+      setAlertName2(false)
     }else{
       setAlertName(false)
+    }
+
+    if(sliceName) {
+      setAlertName2(true)
+      setLoading(false)
+      document.getElementById("name_product").value = "";
+      nameProductUpdate("")
+    }else{
+      setAlertName2(false)
     }
 
     if(price === ""){
@@ -100,11 +116,11 @@ const Rent = () => {
     }
 
     const formData = new FormData();
-    formData.append("name" , nameProduct)
+    formData.append("name" , nameProduct.trim())
     formData.append("subcategory_id" , category)
     formData.append("city_id" , city)
     formData.append("price" , price)
-    formData.append("description" , desc)
+    formData.append("description" , desc.trim())
     formData.append("stock" , stock)
     guarantee.map((el) => 
     formData.append("guarantee" , el)
@@ -113,6 +129,9 @@ const Rent = () => {
     formData.append("photos" , el)
     )
     
+    if(photo.length > 0){
+
+      if(desc.length > 0){
 
     axios.post('https://rentz-id.site/jwt/products', formData,{headers: headers} )
     .then(({data}) => {
@@ -123,7 +142,7 @@ const Rent = () => {
         showConfirmButton: false,
         timer: 1500
       }).then(()=> {
-        navigate('/')
+        navigate('/produk')
       })
     }).catch((err) => {
       console.log(err);
@@ -131,7 +150,8 @@ const Rent = () => {
       setLoading(false);
     });
     
-
+     }
+   }
   }
 
   const handlePhoto = (e) => {
@@ -188,10 +208,12 @@ const Rent = () => {
           <div className='form-left'>
         <Form.Group  >
           <Form.Control id="name_product" className="p-3 b-bottom-signup" type="text" placeholder="Nama Produk *"
-            onChange={(e) =>  nameProductUpdate(e.target.value)}
+            onChange={(e) =>  (nameProductUpdate(e.target.value), setAlertName(false), setAlertName2(false))}
           />
            {alertName && <p className='alerts'>Nama produk tidak boleh kosong.</p>}
           {!alertName && <></>}
+          {alertName2 && <p className='alerts'>Format nama tidak sesuai.</p>}
+          {!alertName2 && <></>}
         </Form.Group>  
        
         <Form.Group >
@@ -278,7 +300,7 @@ const Rent = () => {
 
         <Form.Group className=" mb-4" >
           <Form.Control id="desc_product" className="mb-1 p-3 "  as="textarea"  placeholder="Deskripsi Produk *" 
-            onChange={(e) => descUpdate(e.target.value) }
+            onChange={(e) => descUpdate(e.target.value.trim()) }
           />
           {alertDesc && <div className='alerts'>Deskripsi tidak boleh kosong.</div>}
           {!alertDesc && <></>}
@@ -291,7 +313,7 @@ const Rent = () => {
           {loading && <Spinner animation="border" variant="light" />}
           {!loading && <span>Tambahkan</span>}
         </button>
-        <button className=" mb-1 p-2 btn-cancel-addProduct " >
+        <button className=" mb-1 p-2 btn-cancel-addProduct" onClick={() => navigate('/produk')} >
           Batalkan
         </button>
         </Form>
