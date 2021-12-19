@@ -36,3 +36,24 @@
     
   }
 }
+
+// --------------- Responsive for phone -------------------------------
+
+@media (max-width: 576px) { 
+
+  .c-footer footer {
+    height: 50px;
+    padding: 0 10px;
+
+      p{
+      font-size: 16px;
+     }
+
+     .follow-footer {
+       p {
+         font-size: 14px;
+       }
+     }
+  }
+
+}

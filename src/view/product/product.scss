@@ -72,7 +72,7 @@
           }
 
           p:nth-child(2){
-            margin-bottom: 37px;
+            margin-bottom: 64px;
           }
         }
       }
@@ -82,22 +82,32 @@
 
         button:first-child {
           width: 100%;
-          border: none;
-          background-color: #ff9800;
-          color : white;
-          padding: 10px 10px;
-          margin-bottom: 10px;
+          border: 1px solid #046C91;
+          background-color: #ffffff;
+          color : #046C91;
+          padding: 5px 10px;
+          margin-bottom: 13px;
           border-radius: 6px;
           box-shadow: 0 3px 6px #b4b4b4;
         }
 
         button:nth-child(2) {
           width: 100%;
-          border: none;
+          border: 1px solid #ff9800;
+          background-color: #ffffff;
+          color : #ff9800;
+          padding: 5px 10px;
+          margin-bottom: 10px;
+          border-radius: 6px;
+          box-shadow:0 3px 6px #b4b4b4;;
+        }
+
+        button:nth-child(3) {
+          width: 100%;
+          border: 1px solid #c40000;
           background-color: #c40000;
           color : white;
-          padding: 10px 10px;
-          margin-bottom: 10px;
+          padding: 5px 10px;
           border-radius: 6px;
           box-shadow:0 3px 6px #b4b4b4;;
         }

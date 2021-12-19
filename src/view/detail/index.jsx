@@ -42,6 +42,7 @@ const Detail = () => {
       updateDetail(data.data);
       updateLat(data.data.Latitude);
       updateLong(data.data.Longitude);
+      window.scrollTo(0,0);
     })
 
   },[updateDetail])
@@ -61,7 +62,7 @@ const Detail = () => {
   };
 
   if(detail === null) {
-    return (<></>)
+    return (<div style={{ height : "100vh" }}></div>)
   }
   return (
     <>

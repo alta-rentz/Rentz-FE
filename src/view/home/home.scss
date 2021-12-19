@@ -92,6 +92,7 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         background-color: #ffffff;
+
       }
 
       .img-products-loading {
@@ -184,3 +185,54 @@
       transform: translateX(100%);
     }
   }
+
+
+  // ---------------------- Responsive for phone ------------------------------------
+
+  @media (max-width: 576px) { 
+
+    .c-home .page-home .page-carousel img {
+      height: 150px;
+    }
+
+    .c-home .page-home .category-home {
+    
+      .dropdown-home {
+        width: 170px;
+        margin-left: 10px;
+        font-size: 14px;
+      }
+
+      .dropdown-kategori {
+        position: absolute;
+        inset: 0px 0px auto auto;
+        left: 10px!important;
+        width: 100px;
+        margin-top: 0;
+        font-size: 14px;
+      }
+
+      h5 {
+        font-size: 16px;
+      }
+    }
+    .c-home .page-home .page-list .card-home .cards {
+      width: 46%;
+      height: 200px;
+      margin: 2%;
+
+      .img-products {
+       height: 150px;
+      }
+
+      .name-product {
+        font-size: 14px;
+      }
+    }
+
+    .c-home .page-home .page-list .load .btn-load {
+      font-size: 14px;
+    }
+
+   }
+

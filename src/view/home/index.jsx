@@ -32,7 +32,7 @@ const handleLoad = () => {
   setTimeout(() => {
     setLoading(false);
     updateLimit(limit + 10);
-    window.scrollTo(0,document.body.scrollHeight);
+    // window.scrollTo(0,document.body.scrollHeight);
   }, 500);
 }
 
@@ -131,8 +131,14 @@ if( list.data.length <= limit ){
           {...(true ? { timeout: 1000 } : {})}
               >
               <div className="cards" loading="lazy" onClick={() => navigate(`/detail/${el.ID}`)} >
-                <div className='img-products'>
-                <img src={el.Url} alt={el.ID} loading="lazy" width="238px" height="200px" />
+                <div className='img-products'
+                  style={{ 
+                    backgroundImage : `url('${el.Url}')`,
+                    backgroundPosition : 'center',
+                    backgroundSize : 'contain',
+                    backgroundRepeat : 'no-repeat'
+                   }}
+                >
                 </div>
                 <div className='name-product'>
                   <p>{el.Name}</p>

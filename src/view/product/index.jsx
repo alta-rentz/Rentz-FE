@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BsBoxSeam } from 'react-icons/bs';
+import { BsBoxSeam, BsFillEyeFill } from 'react-icons/bs';
 import { FaEdit } from 'react-icons/fa';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import './product.scss';
@@ -50,8 +50,9 @@ const Product = () => {
     </div>
     </>)
   }
+
+  const sortList =list.sort((a, b) => b.ID - a.ID)
   
-  console.log(list);
   return (
     <>
     <div className='c-product'>
@@ -65,8 +66,8 @@ const Product = () => {
             <button onClick={() => navigate('/tambah_produk')}>Tambah</button>
           </div>
         </div>
-        {list.map((el, i) => 
-        <div className='card-product'>
+        {sortList.map((el, i) => 
+        <div className='card-product' key={i}>
           <div className='item-product'>
             <img src={el.Url} alt={el.Url} width="150px"/>
             <div className='item-info'>
@@ -76,6 +77,7 @@ const Product = () => {
             </div>
           </div>
           <div className='product-function'>
+            <button onClick={() => navigate(`/detail/${el.ID}`)}><BsFillEyeFill/></button>
             <button>< FaEdit/></button>
             <button>< RiDeleteBin5Line /></button>
           </div>
