@@ -208,7 +208,7 @@ const Rent = () => {
           <div className='form-left'>
         <Form.Group  >
           <Form.Control id="name_product" className="p-3 b-bottom-signup" type="text" placeholder="Nama Produk *"
-            onChange={(e) =>  (nameProductUpdate(e.target.value), setAlertName(false), setAlertName2(false))}
+            onChange={(e) =>  {nameProductUpdate(e.target.value); setAlertName(false); setAlertName2(false)}}
           />
            {alertName && <p className='alerts'>Nama produk tidak boleh kosong.</p>}
           {!alertName && <></>}
@@ -217,10 +217,10 @@ const Rent = () => {
         </Form.Group>  
        
         <Form.Group >
-          <Form.Control id="price_product" className="p-3" type="number" placeholder="Harga Produk *" 
+          <Form.Control id="price_product" className="p-3" type="number" placeholder="Harga Rental *" 
             onChange={(e) => priceUpdate(e.target.value) } 
           />
-          {alertPrice && <p className='alerts'>Harga produk tidak boleh kosong.</p>}
+          {alertPrice && <p className='alerts'>Harga rental tidak boleh kosong.</p>}
           {!alertPrice && <></>}
         </Form.Group>
         <Form.Group >

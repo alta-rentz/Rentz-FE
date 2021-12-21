@@ -207,10 +207,21 @@
     background-color: rgba(0,0,0,.54);
     height: 100%;
     z-index: 9999;
+
+    .page-users {
+      position: absolute;
+      bottom: 0;
+       width: 100%;
+       padding: 20px;
+       background-color: white;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
     
     .page-location {
     position: absolute;
     bottom: 0;
+    height: 85%;
      width: 100%;
      padding: 20px;
      background-color: white;
@@ -227,6 +238,8 @@
           color: #5c5b5b;
         }
       }
+
+      
 
       .src-location {
         position: relative;
@@ -266,7 +279,6 @@
         display: flex;
         justify-content: flex-start;
         margin-top: 25px;
-        margin-bottom: 320px;
 
         .box-city {
           display: flex;
@@ -297,7 +309,7 @@
     align-items: center;
     width: 100%;
     margin-top: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 
     .register-phone {
       width: 49%;

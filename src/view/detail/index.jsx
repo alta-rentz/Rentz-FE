@@ -16,16 +16,20 @@ import Fade from '@mui/material/Fade';
 import AddCart from '../add-cart';
 import CheckLogin from '../../components/checkLogin';
 import CheckLoginPhone from '../../components/checkloginphone';
-import { ImPhone } from 'react-icons/im'
+import { ImPhone } from 'react-icons/im';
+import defaultImage from '../../images/no-image.png';
 
 const Detail = () => {
   const date = new Date();
-  const [value, setValue] = useState([date, date]);
+  const [value, setValue] = useState([date.setDate(date.getDate() + 1), date]);
   const [lat, updateLat] = useState(0);
   const [long, updateLong] = useState(0);
   const [isLogin, updateLogin] = useState(false);
   const [detail, updateDetail] = useState(null);
+  const [nameProduct, updateNameProduct] = useState("");
+  const [price, updatePrice] = useState("")
   const [isPhone, setIsPhone] = useState(false);
+  const [rentButton, setRentButton] = useState(false);
   const getToken = localStorage.getItem("token");
   let locationPathName = window.location.pathname;
   let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
@@ -33,26 +37,72 @@ const Detail = () => {
   function getWeeksAfter(date, amount) {
     return date ? addWeeks(date, amount) : undefined;
   }
-
-  console.log(detail);
-
+  // function filterWeekends(date) {
+  //   // Return false if Saturday or Sunday
+  //   return (
+  //     date.getDate() < 28 && date.getDate() > 24 && date.getMonth() + 1 === 1 
+  //   )
+  // }
+  
   useEffect(() => {
     axios.get(`https://rentz-id.site/products/${pathName}`)
     .then(({data}) => {
       updateDetail(data.data);
+      updateNameProduct(data.data.Name);
+      updatePrice(data.data.Price)
       updateLat(data.data.Latitude);
       updateLong(data.data.Longitude);
       window.scrollTo(0,0);
-    })
+    });
 
-  },[updateDetail])
+  },[updateDetail, pathName]);
 
   useEffect(() => {
     if(getToken){
       updateLogin(true);
       setIsPhone(true);
     }
-  },[getToken])
+  },[getToken]);
+
+  const time_in = new Date(value[0]);
+  const time_out = new Date(value[1]);
+
+  const checkInDate   = (time_in.getDate() < 10 ) ? '0' + time_in.getDate() : time_in.getDate();
+  const checkInMonth  = ((time_in.getMonth() + 1) < 10 ) ? '0' + (time_in.getMonth() + 1) : (time_in.getMonth() + 1);
+  const checkInYear   = time_in.getFullYear();
+
+  const checkOutDate   = (time_out.getDate() < 10 ) ? '0' + time_out.getDate() : time_out.getDate();
+  const checkOutMonth  = ((time_out.getMonth() + 1) < 10 ) ? '0' + (time_out.getMonth() + 1) : (time_out.getMonth() + 1);
+  const checkOutYear   = time_out.getFullYear();
+
+  const checkIn = `${checkInYear}-${checkInMonth}-${checkInDate}`;
+  const checkOut = `${checkOutYear}-${checkOutMonth}-${checkOutDate}`;
+
+  const amountDay = ((time_out.getDate() < time_in.getDate()) ? time_out.getDate() + 31 : time_out.getDate()) - time_in.getDate() + 1;
+
+  useEffect(() => {
+    axios.post(`https://rentz-id.site/booking/check/${pathName}`, {
+      "time_in"    : checkIn,
+      "time_out"   : checkOut
+    })
+    .then(({data}) => {
+      setRentButton(true);
+    }).catch((err)=> {
+      console.log(err);
+      setRentButton(false);
+    })
+  });
+
+  const add_cart = {
+    "product_id"    : pathName,
+    "name_product"  : nameProduct,
+    "price"         : price,
+    "amountDay"     : amountDay,
+    "time_in"       : `${time_in.getFullYear()}-${(time_in.getMonth() + 1)}-${time_in.getDate()}`,
+    "time_out"      : `${time_out.getFullYear()}-${((time_out.getMonth() + 1) < 10 ) ? '0' + (time_out.getMonth() + 1) : (time_out.getMonth() + 1)}-${time_out.getDate()}`,
+    "qty"           :  1
+  }
+
   const settings = {
     dots: true,
     infinite: true,
@@ -64,6 +114,7 @@ const Detail = () => {
   if(detail === null) {
     return (<div style={{ height : "100vh" }}></div>)
   }
+
   return (
     <>
      <Fade  in={true}
@@ -77,7 +128,7 @@ const Detail = () => {
           <Slider {...settings}>
           {detail.Url.map((el, i) => 
           <div className='in-image' key={i}>
-            <img src={el} alt="i" width="70%" height="100%" />
+            <img src={el} alt={i} onError={(e)=>{e.target.onerror = null; e.target.src=defaultImage}} width="70%" height="100%" />
           </div>
           )}
         </Slider>
@@ -107,10 +158,14 @@ const Detail = () => {
               <DateRangePicker
                 disablePast
                 value={value}
+                // shouldDisableDate={filterWeekends}
                 maxDate={getWeeksAfter(value[0], 2)}
                 onChange={(newValue) => {
                   setValue(newValue);
+
+                  
                 }}
+                
                 renderInput={(startProps, endProps) => (
                   <React.Fragment>
                     <TextField {...startProps} />
@@ -128,8 +183,17 @@ const Detail = () => {
               <p>Medan, Sumatra Utara, Indonesia</p>
             </div>
             <div className='c-two'>
-              {isLogin && < AddCart/>}
-              {!isLogin && <CheckLogin />}  
+
+              {rentButton && <>
+                {isLogin && < AddCart {...add_cart} />}
+                {!isLogin && <CheckLogin />}
+                </>}
+              {!rentButton && <>
+                {isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Rental</button>}
+                {!isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Rental</button>}
+                </>}
+        
+              
               
             </div>
           </div>

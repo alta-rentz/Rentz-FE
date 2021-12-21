@@ -1,5 +1,5 @@
 import './cart.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
 import img from "../../images/kamera1.jpg";
 import Checkout from "../../components/checkout";
@@ -34,7 +34,7 @@ const Cart = () => {
       <div className='page-cart'>
         <div className='title-cart'>
           <div className='title-left'>
-            <h5><TiShoppingCart /> Keranjang Saya</h5>
+            <h5><TiShoppingCart /> Keranjang</h5>
             <div className='underline-title'></div>
           </div>
           <div className='title-rigth'>

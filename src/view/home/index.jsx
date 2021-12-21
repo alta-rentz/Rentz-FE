@@ -6,6 +6,7 @@ import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom';
 import baner1 from '../../images/baner1.jpeg';
 import baner2 from '../../images/baner2.jpeg';
+import defaultImage from '../../images/no-image.png';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -133,12 +134,11 @@ if( list.data.length <= limit ){
               <div className="cards" loading="lazy" onClick={() => navigate(`/detail/${el.ID}`)} >
                 <div className='img-products'
                   style={{ 
-                    backgroundImage : `url('${el.Url}')`,
-                    backgroundPosition : 'center',
-                    backgroundSize : 'contain',
-                    backgroundRepeat : 'no-repeat'
+                    display : "flex",
+                    justifyContent : "center",
                    }}
                 >
+              <img id="img" src={el.Url} onError={(e)=>{e.target.onerror = null; e.target.src=defaultImage}} alt={el.Url} width="238px"/>
                 </div>
                 <div className='name-product'>
                   <p>{el.Name}</p>

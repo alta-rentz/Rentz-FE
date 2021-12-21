@@ -25,7 +25,7 @@ const Product = () => {
       setLoading(true)
     })
 
-  }, [axios, updateList])
+  })
 
   
   if (list === undefined){

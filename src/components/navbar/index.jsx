@@ -21,7 +21,7 @@ const Navbar = () => {
   const getName = localStorage.getItem("userName");
   const [userModal, setUserModal] = useState(false);
   const [locationModal, setlocationModal] = useState(false);
-  const [inputLocation, setInputLocation] = useState("");
+  const [ setInputLocation] = useState("");
   const [activeClose, setActiveClose] = useState(false);
 
   useEffect(() => {
@@ -165,7 +165,7 @@ const Navbar = () => {
            <div className='page-location-phone'>
            <Slide direction="up" in={true} style={{ transformOrigin: '0 0 0' }}
           {...(true ? { timeout: 400 } : {})}>
-            <div className='page-location'>
+            <div className='page-users'>
               <div className='header-location'>
                 <IoClose size={30} onClick={() => bntClose()}/>
                 <span>Menu</span>

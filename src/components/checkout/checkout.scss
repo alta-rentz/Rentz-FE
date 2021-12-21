@@ -1,28 +1,24 @@
-.checkout-scroll {
-  background-color: #e9e9e9;
-  height: 170px;
-  overflow-y: scroll;
-}
+.total-payment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 40px;
 
-.checkout-body {
-  border-bottom: 1px solid #b4b4b4;
+  p{
+    font-size: 18px;
+    margin: 0;
+  }
+
+  p:nth-child(2) {
+    color: #046C91;
+    font-weight: bold;
+  }
 }
 
 .active {
   background-color: #046C91;
   color: #ffffff;
-}
-
-.total-payment {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 40px;
-  border-bottom: 1px solid #b4b4b4;
-
-  p{
-    margin-bottom: 30px;
-  }
 }
 
 .payment {
@@ -56,3 +52,17 @@
   }
 }
 
+.method {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  input {
+    cursor: pointer;
+  }
+  
+  label {
+    cursor: pointer;
+    padding-left: 30px;
+  }
+}

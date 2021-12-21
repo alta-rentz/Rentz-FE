@@ -2,11 +2,43 @@ import { Modal, Button } from 'react-bootstrap';
 import './add-cart.scss';
 import { useState } from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 
-const AddCart = () => {
+const AddCart = (data) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+console.log(data);
+
+  const objInput = {
+    "product_id" : data.product_id,
+    "time_in" : data.time_in,
+    "time_out" : data.time_out,
+    "qty" : data.qty
+  }
+
+  console.log(objInput);
+
+  const handleAdd = () => {
+    axios.post(`https://rentz-id.site/booking`, {
+      "product_id" : data.product_id,
+      "time_in" : data.time_in,
+      "time_out" : data.time_out,
+      "qty" : data.qty
+    })
+    .then(({data}) => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: "Tambahkan ke keranjang berhasil",
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <>
@@ -30,15 +62,15 @@ const AddCart = () => {
               <p>Jumlah Hari</p>
             </div>
             <div className='body-two'>
-            <p>Kamera Canon</p>
-            <p>Rp.250.000</p>
-            <p>x 1 Hari</p>
+            <p>{data.name_product}</p>
+            <p>Rp.{data.price}</p>
+            <p>x {data.amountDay} Hari</p>
             </div>
         </Modal.Body>
         <Modal.Footer>
             <p>Total Harga</p> 
-          <p>Rp. 250.000</p>
-          <Button className='form-control' variant="success">Tambahkan</Button>
+          <p>Rp. {data.price*data.amountDay}</p>
+            <Button className='form-control' variant="success" onClick={() => handleAdd()}>Tambahkan</Button>
         </Modal.Footer>
       </Modal>
     </>
