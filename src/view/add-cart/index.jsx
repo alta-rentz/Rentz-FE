@@ -1,32 +1,39 @@
 import { Modal, Button } from 'react-bootstrap';
 import './add-cart.scss';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TiShoppingCart } from 'react-icons/ti';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Detail from '../detail';
 
 const AddCart = (data) => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [done, updateDone] = useState(false);
+  let locationPathName = window.location.pathname;
+  let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
+
 console.log(data);
 
+const headers = {
+  "Content-type": "application/json; charset=UTF-8",
+  "Authorization": 'Bearer ' + localStorage.getItem("token")
+};
+
   const objInput = {
-    "product_id" : data.product_id,
+    "product_id" : +pathName,
     "time_in" : data.time_in,
     "time_out" : data.time_out,
-    "qty" : data.qty
+    "qty" : 1
   }
 
   console.log(objInput);
 
   const handleAdd = () => {
-    axios.post(`https://rentz-id.site/booking`, {
-      "product_id" : data.product_id,
-      "time_in" : data.time_in,
-      "time_out" : data.time_out,
-      "qty" : data.qty
-    })
+    axios.post(`https://rentz-id.site/jwt/booking`,objInput, {headers: headers} )
     .then(({data}) => {
       Swal.fire({
         position: 'center',
@@ -34,14 +41,35 @@ console.log(data);
         title: "Tambahkan ke keranjang berhasil",
         showConfirmButton: false,
         timer: 1500
-      })
+      }).then(() => {
+        navigate(`/detail/${pathName}`);
+        updateDone(true)
+        handleClose(false)
+      });
+      
     }).catch((err) => {
-      console.log(err);
+      console.log(err.response.data.message);
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        text: err.response.data.message,
+        showConfirmButton: true,
+        timer: 1500
+      }).then(() => {
+        handleClose(false)
+      })
     })
   }
 
+  
+
   return (
     <>
+      {/* <div className='d-none'>
+      {done && <Detail d={true} />}
+      {!done && <></>}
+      </div> */}
+      
       <Button onClick={handleShow}>
         Rental
       </Button>

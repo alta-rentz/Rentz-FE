@@ -138,7 +138,7 @@ if( list.data.length <= limit ){
                     justifyContent : "center",
                    }}
                 >
-              <img id="img" src={el.Url} onError={(e)=>{e.target.onerror = null; e.target.src=defaultImage}} alt={el.Url} width="238px"/>
+              <img id="img" src={el.Url} onError={(e)=>{e.target.onerror = null; e.target.src=defaultImage}} alt={el.Url} />
                 </div>
                 <div className='name-product'>
                   <p>{el.Name}</p>

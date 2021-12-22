@@ -18,10 +18,11 @@ import CheckLogin from '../../components/checkLogin';
 import CheckLoginPhone from '../../components/checkloginphone';
 import { ImPhone } from 'react-icons/im';
 import defaultImage from '../../images/no-image.png';
+import Swal from 'sweetalert2';
 
-const Detail = () => {
+const Detail = (data) => {
   const date = new Date();
-  const [value, setValue] = useState([date.setDate(date.getDate() + 1), date]);
+  const [value, setValue] = useState([date.setDate(date.getDate() + 1), date.setDate(date.getDate() + 1)]);
   const [lat, updateLat] = useState(0);
   const [long, updateLong] = useState(0);
   const [isLogin, updateLogin] = useState(false);
@@ -34,6 +35,7 @@ const Detail = () => {
   let locationPathName = window.location.pathname;
   let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
 
+  console.log(data.d);
   function getWeeksAfter(date, amount) {
     return date ? addWeeks(date, amount) : undefined;
   }
@@ -81,6 +83,18 @@ const Detail = () => {
   const amountDay = ((time_out.getDate() < time_in.getDate()) ? time_out.getDate() + 31 : time_out.getDate()) - time_in.getDate() + 1;
 
   useEffect(() => {
+
+    if (checkIn === checkOut) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        text: "tidak bisa pilih tanggal yang sama",
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        setValue([date.setDate(date.getDate() - 1), date.setDate(date.getDate() + 1)]);
+      })
+    }else{
     axios.post(`https://rentz-id.site/booking/check/${pathName}`, {
       "time_in"    : checkIn,
       "time_out"   : checkOut
@@ -91,15 +105,19 @@ const Detail = () => {
       console.log(err);
       setRentButton(false);
     })
+  }
   });
 
+  const resetDate = () => {
+    setValue([date.setDate(date.getDate() - 1), date.setDate(date.getDate() + 1)]);
+  }
   const add_cart = {
-    "product_id"    : pathName,
+    "product_id"    : +pathName,
     "name_product"  : nameProduct,
     "price"         : price,
     "amountDay"     : amountDay,
-    "time_in"       : `${time_in.getFullYear()}-${(time_in.getMonth() + 1)}-${time_in.getDate()}`,
-    "time_out"      : `${time_out.getFullYear()}-${((time_out.getMonth() + 1) < 10 ) ? '0' + (time_out.getMonth() + 1) : (time_out.getMonth() + 1)}-${time_out.getDate()}`,
+    "time_in"       : `${checkInYear}-${checkInMonth}-${checkInDate}`,
+    "time_out"      : `${checkOutYear}-${checkOutMonth}-${checkOutDate}`,
     "qty"           :  1
   }
 
@@ -153,29 +171,6 @@ const Detail = () => {
           <div className='available-info'>
             <h5><FaCheckCircle /> Tersedia untuk di rental {detail.Stock} buah</h5>
           </div>
-          <div className='in-date'>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DateRangePicker
-                disablePast
-                value={value}
-                // shouldDisableDate={filterWeekends}
-                maxDate={getWeeksAfter(value[0], 2)}
-                onChange={(newValue) => {
-                  setValue(newValue);
-
-                  
-                }}
-                
-                renderInput={(startProps, endProps) => (
-                  <React.Fragment>
-                    <TextField {...startProps} />
-                    <Box sx={{ mx: 2 }}> to </Box>
-                    <TextField {...endProps} />
-                  </React.Fragment>
-                )}
-              />
-              </LocalizationProvider>
-          </div>
           <div className='rent-info'>
             <div className='c-one'>
               <h4>Rp.{detail.Price} / hari</h4>
@@ -192,10 +187,30 @@ const Detail = () => {
                 {isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Rental</button>}
                 {!isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Rental</button>}
                 </>}
-        
-              
-              
             </div>
+          </div>
+          <div className='in-date'>
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DateRangePicker
+                disablePast
+                value={value}
+                // shouldDisableDate={filterWeekends}
+                maxDate={getWeeksAfter(value[0], 2)}
+                minDate={value[0]}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                
+                renderInput={(startProps, endProps) => (
+                  <React.Fragment>
+                    <TextField {...startProps} />
+                    <Box sx={{ mx: 2 }}> to </Box>
+                    <TextField {...endProps} />
+                  </React.Fragment>
+                )}
+              />
+              </LocalizationProvider>
+              <p onClick={() => resetDate()}><u>Reset</u></p>
           </div>
           <div className='desc-user'>
             <h5>Deskripsi Pemilik</h5>

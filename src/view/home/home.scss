@@ -93,6 +93,10 @@
         border-top-right-radius: 10px;
         background-color: #ffffff;
 
+        img {
+          width : 238px;
+        }
+
       }
 
       .img-products-loading {
@@ -234,5 +238,12 @@
       font-size: 14px;
     }
 
+    .img-products {
+
+      img {
+        width : 171px!important;
+      }
+
+    }
    }
 

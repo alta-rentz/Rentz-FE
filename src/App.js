@@ -13,6 +13,7 @@ import Detail from './view/detail';
 import Cart from './view/cart';
 import Product from './view/product';
 import Rent from './view/rent';
+import Checkout from './components/checkout';
 
 const App = () => {
   return (
@@ -30,6 +31,7 @@ const App = () => {
     <Route path=":detailId" element={<Detail />} />
     </Route>
     <Route path="/keranjang" element={<Cart />}/>
+    <Route path="/checkout" element={<Checkout />}/>
     <Route path="/produk" element={<Product />}/>
     <Route path="/tambah_produk" element={<Rent />}/>
     </Routes>

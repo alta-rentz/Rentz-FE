@@ -1,9 +1,28 @@
+.c-checkout{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .page-checkout {
+    width: 30%;
+    padding: 20px;
+    margin-top: 100px;
+    margin-bottom: 300px;
+    box-shadow: 0 3px 6px #b4b4b4;
+  }
+
+  h5 {
+    margin-bottom: 30px;
+  }
+}
+
 .total-payment {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 40px;
+  background-color: #f3efef;
 
   p{
     font-size: 18px;
@@ -36,12 +55,6 @@
     margin-top: 25px;
     margin-bottom: 25px;
 
-    button {
-      border: 1px solid #b4b4b4;
-      border-radius: 5px;
-      box-shadow: 0 3px 6px #b4b4b4;
-      margin-right: 20px;
-    }
     .cod {
       padding: 5px 43.5px;
     }
