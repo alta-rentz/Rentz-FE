@@ -37,7 +37,7 @@ const Navbar = () => {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: "Anda telah keluar",
+      text: "Anda telah keluar",
       showConfirmButton: false,
       timer: 1500
     }).then((result) => {
@@ -106,24 +106,24 @@ const Navbar = () => {
             <div className="user-icon">
             <Dropdown className= "dropdown-none" >
             <Dropdown.Toggle className="dropdown-user" id="dropdown-basic">
-             {isLogin && <><div className='dot'></div><div className='user-login'>{name[0].toLocaleUpperCase()}</div></>} 
-             {!isLogin && <FaUserCircle className="svg_icons" style={{ color : "#C7D3E3" }}/>} 
+             {isLogin && <><div className='dot'></div><div id="logo-user-login" className='user-login'>{name[0].toLocaleUpperCase()}</div></>} 
+             {!isLogin && <FaUserCircle id="logo-user-notlogin" className="svg_icons" style={{ color : "#C7D3E3" }}/>} 
             </Dropdown.Toggle>
 
             <Dropdown.Menu  align="end">
             {isLogin && <>
-            <span ><Dropdown.Item onClick={() => navigate('/profil')}>Profil</Dropdown.Item></span>
-            <span ><Dropdown.Item onClick={() => navigate('/keranjang')}>Keranjang</Dropdown.Item></span>
-            <span ><Dropdown.Item onClick={() => navigate('/produk')}>Rental Produk</Dropdown.Item></span>
-            <span ><Dropdown.Item style={{ color : "red" }} onClick={() => logout()}>Logout</Dropdown.Item></span>
+            <span ><Dropdown.Item onClick={() => navigate('/profil')} id="profil">Profil</Dropdown.Item></span>
+            <span ><Dropdown.Item onClick={() => navigate('/keranjang')} id="cart">Keranjang</Dropdown.Item></span>
+            <span ><Dropdown.Item onClick={() => navigate('/produk')} id="add-rent">Rental Produk</Dropdown.Item></span>
+            <span ><Dropdown.Item style={{ color : "red" }} onClick={() => logout()} id="logout">Logout</Dropdown.Item></span>
             </>}
-            {!isLogin && <span><Dropdown.Item onClick={goRegister}>Daftar</Dropdown.Item>
-            <Dropdown.Item onClick={goLogin}>Masuk</Dropdown.Item></span>}
+            {!isLogin && <span><Dropdown.Item id="daftar" onClick={goRegister}>Daftar</Dropdown.Item>
+            <Dropdown.Item id="masuk" onClick={goLogin}>Masuk</Dropdown.Item></span>}
             </Dropdown.Menu>
            </Dropdown>
            <span className='user-phone' onClick={() => setUserModal(true)}>
-           {isLogin && <><div className='dot'></div><div className='user-login'>{name[0].toLocaleUpperCase()}</div></>} 
-           {!isLogin && <FaUserCircle className="svg_icons" style={{ color : "#C7D3E3" }}/>}    
+           {isLogin && <><div className='dot'></div><div id="user-login-phone" className='user-login'>{name[0].toLocaleUpperCase()}</div></>} 
+           {!isLogin && <FaUserCircle id="user-notlogin-phone"  className="svg_icons" style={{ color : "#C7D3E3" }}/>}    
             </span>
            </div>
            </div>

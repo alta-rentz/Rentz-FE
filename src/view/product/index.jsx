@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import Navbar from '../../components/navbar';
+import Footer from '../../components/footer';
 import { useNavigate } from 'react-router-dom';
 import { BsBoxSeam, BsFillEyeFill } from 'react-icons/bs';
 import { FaEdit } from 'react-icons/fa';
@@ -11,6 +13,10 @@ const Product = () => {
   const navigate = useNavigate();
   const [list, updateList] = useState();
   const [loading, setLoading] = useState(false);
+
+  const toRupiah = (money) => {
+    return new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(money);
+  }
 
   const headers = {
     "Authorization": 'Bearer ' + localStorage.getItem("token")
@@ -31,6 +37,7 @@ const Product = () => {
   if (list === undefined){
     return (
     <>
+    <Navbar />
       <div className='c-product'>
       <div className='page-product'>
         <div className='title-product'>
@@ -48,13 +55,15 @@ const Product = () => {
         </div>
       </div>
     </div>
+    <Footer />
     </>)
   }
 
-  const sortList =list.sort((a, b) => b.ID - a.ID)
+  const sortList =list.sort((a, b) => b.ID - a.ID);
   
   return (
     <>
+    <Navbar />
     <div className='c-product'>
       <div className='page-product'>
         <div className='title-product'>
@@ -69,10 +78,10 @@ const Product = () => {
         {sortList.map((el, i) => 
         <div className='card-product' key={i}>
           <div className='item-product'>
-            <img src={el.Url} alt={el.Url} width="150px"/>
+            <img src={el.Url} alt={el.Url}/>
             <div className='item-info'>
             <p>{el.Name}</p>
-            <p>Rp.{el.Price} / Hari</p>
+            <p>{toRupiah(el.Price)} / Hari</p>
             <p>Stok Produk : {el.Stock}</p>
             </div>
           </div>
@@ -86,6 +95,7 @@ const Product = () => {
         
       </div>
     </div>
+    <Footer />
     </>
   )
 }

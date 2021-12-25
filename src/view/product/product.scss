@@ -4,6 +4,7 @@
   flex-direction: column;
   width: 100%;
   background-color: #f0f3f5;
+  margin-top: 80px;
 
   .page-product {
     width: 1000px;
@@ -56,15 +57,16 @@
         display: flex;
 
         img {
+          width: 200px;
+          height: 125px;
           margin-right: 150px;
-          border: 1px solid #046C91;
-          border-radius: 10px;
           box-shadow: 0 3px 6px #b4b4b4;
         }
 
         .item-info{
           p {
             margin: 0;
+            font-size: 14px;
           }
 
           p:first-child {
@@ -88,7 +90,6 @@
           padding: 5px 10px;
           margin-bottom: 13px;
           border-radius: 6px;
-          box-shadow: 0 3px 6px #b4b4b4;
         }
 
         button:nth-child(2) {
@@ -99,7 +100,6 @@
           padding: 5px 10px;
           margin-bottom: 10px;
           border-radius: 6px;
-          box-shadow:0 3px 6px #b4b4b4;;
         }
 
         button:nth-child(3) {
@@ -109,7 +109,6 @@
           color : white;
           padding: 5px 10px;
           border-radius: 6px;
-          box-shadow:0 3px 6px #b4b4b4;;
         }
       }
     }
@@ -125,3 +124,44 @@
   align-items: center;
   color: #046C91;
 }
+
+// ---------------------- Responsive for phone small ------------------------------------
+
+@media (min-width: 100px) and (max-width: 374px) { 
+  .c-product {
+    padding: 5px;
+  }
+  .c-product .page-product {
+    width: 100%;
+  }
+
+  .title-left {
+    h5 {
+      font-size: 16px;
+    }
+    
+  }
+
+  .c-product .page-product .card-product .item-product img {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+  }
+}
+
+
+// ---------------------- Responsive for phone middle ------------------------------------
+
+@media (min-width: 375px) and (max-width: 600px) { 
+
+
+}
+
+
+// --------------------- responsive to Desktop ----------------------
+
+@media (min-width: 992px) and (max-width: 1600px) { 
+
+
+
+ }

@@ -4,8 +4,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import Navbar from './components/navbar';
-import Footer from './components/footer';
 import Home from './view/home';
 import Daftar from './view/Register/Register';
 import Masuk from './view/SignIn/signIn';
@@ -18,7 +16,6 @@ import Checkout from './components/checkout';
 const App = () => {
   return (
     <BrowserRouter>
-    <Navbar />
     <Routes>
     <Route index  path="/" element={<Home />} />
     <Route path="/masuk" element={<Masuk />} >
@@ -35,7 +32,6 @@ const App = () => {
     <Route path="/produk" element={<Product />}/>
     <Route path="/tambah_produk" element={<Rent />}/>
     </Routes>
-    <Footer />
   </BrowserRouter>
   )
 }

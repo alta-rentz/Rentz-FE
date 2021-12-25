@@ -16,7 +16,9 @@ const AddCart = (data) => {
   let locationPathName = window.location.pathname;
   let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
 
-console.log(data);
+  const toRupiah = (money) => {
+    return new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(money);
+  }
 
 const headers = {
   "Content-type": "application/json; charset=UTF-8",
@@ -91,13 +93,13 @@ const headers = {
             </div>
             <div className='body-two'>
             <p>{data.name_product}</p>
-            <p>Rp.{data.price}</p>
+            <p>{toRupiah(data.price)}</p>
             <p>x {data.amountDay} Hari</p>
             </div>
         </Modal.Body>
         <Modal.Footer>
             <p>Total Harga</p> 
-          <p>Rp. {data.price*data.amountDay}</p>
+          <p>{toRupiah(data.price*data.amountDay)}</p>
             <Button className='form-control' variant="success" onClick={() => handleAdd()}>Tambahkan</Button>
         </Modal.Footer>
       </Modal>

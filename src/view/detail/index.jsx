@@ -1,4 +1,6 @@
 import { FaCheckCircle, FaUserCircle } from 'react-icons/fa';
+import Navbar from '../../components/navbar';
+import Footer from '../../components/footer';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as React from 'react';
@@ -45,6 +47,10 @@ const Detail = (data) => {
   //     date.getDate() < 28 && date.getDate() > 24 && date.getMonth() + 1 === 1 
   //   )
   // }
+
+  const toRupiah = (money) => {
+    return new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(money);
+  }
   
   useEffect(() => {
     axios.get(`https://rentz-id.site/products/${pathName}`)
@@ -135,6 +141,7 @@ const Detail = (data) => {
 
   return (
     <>
+    <Navbar /> 
      <Fade  in={true}
               style={{ transformOrigin: '0 0 0' }}
           {...(true ? { timeout: 500 } : {})}
@@ -152,11 +159,11 @@ const Detail = (data) => {
         </Slider>
           </div>
           <div className='info-detail'>
-            <h5>Detail</h5>
+            <h5>Detail Barang</h5>
             <p>{detail.Description}</p>
           </div>
           <div className='info-desc'>
-          <h5>Deskripsi</h5>
+          <h5>Deskripsi Barang</h5>
           <p>Persyaratan untuk merental produk ini :</p>
           <p>
             {detail.Guarantee.map((el, i) => 
@@ -173,7 +180,7 @@ const Detail = (data) => {
           </div>
           <div className='rent-info'>
             <div className='c-one'>
-              <h4>Rp.{detail.Price} / hari</h4>
+              <h4>{toRupiah(detail.Price)} / hari</h4>
               <p>{detail.Name}</p>
               <p>Medan, Sumatra Utara, Indonesia</p>
             </div>
@@ -215,7 +222,7 @@ const Detail = (data) => {
           <div className='desc-user'>
             <h5>Deskripsi Pemilik</h5>
             <div className='info-user'>
-              <FaUserCircle size="60px" style={{ color : "grey" }}/>
+              <p><FaUserCircle style={{ color : "grey" }}/></p>
               <div className='text-user'>
                 <p>{detail.Nama}</p>
                 <p><i>Bergabung sejak Jan 2020</i></p>
@@ -236,6 +243,7 @@ const Detail = (data) => {
    
     </div>
     </Fade>
+    <Footer/>
     </>
   )
 }

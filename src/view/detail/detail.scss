@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-top: 80px;
   font-family: 'Roboto', sans-serif;
 
   .page-detail {
@@ -22,7 +23,8 @@
         height: 400px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         .in-image {
           display: flex!important;
@@ -48,11 +50,19 @@
         padding: 20px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         h5 {
+          padding: 10px;
           color: #002f34;
-          font-weight: bold;
+          font-size: 18px;
+          background:rgba(0,0,0,.02) ;
+        }
+
+        p {
+          padding-left: 10px;
+          font-size: 14px;
         }
       }
 
@@ -63,11 +73,19 @@
         padding: 20px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         h5 {
+          padding: 10px;
           color: #002f34;
-          font-weight: bold;
+          font-size: 18px;
+          background:rgba(0,0,0,.02) ;
+        }
+
+        p {
+          padding-left: 10px;
+          font-size: 14px;
         }
       }
 
@@ -88,7 +106,8 @@
         padding: 0 20px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         h5 {
           font-size: 16px;
@@ -110,7 +129,8 @@
         padding-left: 20px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         p {
           margin: 0;
@@ -129,7 +149,8 @@
         padding: 10px 20px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         .c-one{
           h4 {
@@ -143,8 +164,7 @@
             color: #002f34;
             margin: 0;
             font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 23px;
+            margin-bottom: 45px;
           }
 
         }
@@ -168,20 +188,26 @@
         width: 100%;
         height: 128px;
         margin-top: 6px;
-        padding: 5px 20px;
+        padding: 10px 20px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         h5 {
           color: #002f34;
-          font-weight: bold;
+          font-size: 18px;
         }
 
         .info-user {
           display: flex;
           margin-top: 15px;
           padding: 0 20px;
+
+          p:first-child {
+            font-size: 40px;
+            margin: 0;
+          }
 
           .text-user {
             margin-left: 30px;
@@ -210,11 +236,12 @@
         padding: 10px 20px;
         border-radius: 8px;
         border: 1px solid #d6d5d5;
-        box-shadow: 0 3px 6px #b4b4b4;
+        box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+        background-color: #ffffff;
 
         h5 {
+          font-size: 18px;
           color: #002f34;
-          font-weight: bold;
         }
       }
     }
@@ -248,6 +275,292 @@
   font-weight: bold;
 }
 
-.swal2-container.swal2-center>.swal2-popup {
-  margin-right: 18px;
+// ---------------------- Responsive for phone small ------------------------------------
+
+@media (min-width: 100px) and (max-width: 374px) { 
+
+  .swal2-container.swal2-center>.swal2-popup {
+    margin-right: 0;
+  }
+
+  .c-detail .page-detail {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .page-one {
+      width: 100%;
+      padding: 0 10px;
+      margin-bottom: 30px;
+
+      .img-detail {
+        height: 300px;
+
+        .in-image {
+          height: 250px;
+        }
+      }
+
+      .info-detail {
+        padding: 12px;
+
+        h5 {
+          font-size: 16px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        height: 110px;
+      }
+
+      .info-desc {
+        padding: 12px;
+
+        h5 {
+          font-size: 16px;
+        }
+
+        p{
+          font-size: 14px;
+        }
+        height: 130px;
+      }
+    }
+  }
+
+  .slick-prev {
+    top: 150px;
+    left: 20px;
+  }
+
+  .slick-next {
+    top: 150px;
+    right: 20px;
+  }
+
+  .c-detail .page-detail .page-two {
+    width: 100%;
+    padding: 0 10px;
+
+    .available-info {
+      padding: 0 12px;
+      h5{
+        font-size: 14px;
+      }
+      
+    }
+
+    .rent-info {
+      padding: 12px;
+    }
+  }
+
+  .c-detail .page-detail .page-two .rent-info .c-one h4 {
+    font-size: 16px;
+  }
+
+  .c-detail .page-detail .page-two .rent-info .c-two button {
+    font-size: 12px;
+    padding: 8px 18px;
+  }
+
+  .c-detail .page-detail .page-two .rent-info .c-one p {
+    font-size: 12px;
+    margin-bottom: 55px;
+  }
+
+  .c-detail .page-detail .page-two .in-date {
+    height: 70px;
+    padding: 15px;
+    
+    p {
+      position: relative;
+      right: 0;
+      font-size: 14px;
+    }
+  }
+
+  .c-detail .page-detail .page-two .desc-user .info-user .text-user {
+    margin-left: 15px;
+
+    p {
+      font-size: 12px!important;
+    }
+  }
+
+  .info-user {
+
+    p:first-child {
+      font-size: 35px!important;
+    }
+  }
+
+  .c-detail .page-detail .page-two .desc-user {
+    padding: 12px;
+  }
+
+  .c-detail .page-detail .page-two .desc-user h5 {
+    font-size: 16px;
+  }
+
+  .c-detail .page-detail .page-two .desc-user .info-user .text-user p:first-child {
+    font-size: 14px;
+  }
+  
+  .c-detail .page-detail .page-two .map-info h5 {
+    font-size: 16px;
+  }
 }
+
+
+// ---------------------- Responsive for phone middle ------------------------------------
+
+@media (min-width: 375px) and (max-width: 600px) { 
+  .swal2-container.swal2-center>.swal2-popup {
+    margin-right: 0;
+  }
+
+  .c-detail .page-detail {
+    width: 100%;
+    flex-direction: column;
+    margin-top: 20px;
+
+    .page-one {
+      width: 100%;
+      padding: 0 10px;
+      margin-bottom: 30px;
+
+      .img-detail {
+        height: 300px;
+
+        .in-image {
+          height: 250px;
+        }
+      }
+
+      .info-detail {
+        h5 {
+          font-size: 16px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+
+        height: 110px;
+      }
+
+      .info-desc {
+        h5 {
+          font-size: 16px;
+        }
+
+        p{
+          font-size: 14px;
+        }
+        height: 130px;
+      }
+    }
+  }
+
+  .slick-prev {
+    top: 150px;
+    left: 20px;
+  }
+
+  .slick-next {
+    top: 150px;
+    right: 20px;
+  }
+
+  .c-detail .page-detail .page-two {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .c-detail .page-detail .page-two .rent-info .c-one h4 {
+    font-size: 18px;
+  }
+
+  .c-detail .page-detail .page-two .rent-info .c-two button {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .c-detail .page-detail .page-two .rent-info .c-one p {
+    margin-bottom: 53px;
+  }
+
+  .c-detail .page-detail .page-two .in-date {
+    height: 70px;
+    padding: 15px;
+    
+    p {
+      position: relative;
+      right: 0;
+      font-size: 14px;
+    }
+  }
+
+  .c-detail .page-detail .page-two .desc-user h5 {
+    font-size: 16px;
+  }
+
+  .c-detail .page-detail .page-two .desc-user .info-user .text-user p:first-child {
+    font-size: 14px;
+  }
+  
+  .c-detail .page-detail .page-two .map-info h5 {
+    font-size: 16px;
+  }
+}
+
+// --------------------- responsive to Desktop ----------------------
+
+@media (min-width: 992px) and (max-width: 1600px) { 
+
+  .c-detail .page-detail {
+    width: 1130px;
+  }
+
+  .c-detail .page-detail .page-one .info-detail {
+    padding: 10px;
+  }
+
+  .c-detail .page-detail .page-one .info-desc {
+    padding: 10px;
+  }
+
+  .c-detail .page-detail .page-two .available-info {
+    padding: 10px;
+  }
+
+  .c-detail .page-detail .page-two .rent-info {
+    padding: 10px;
+  }
+
+  .c-detail .page-detail .page-two .desc-user{
+    padding: 10px;
+  }
+
+  .c-detail .page-detail .page-two .map-info {
+    padding: 10px;
+  }
+
+  .c-detail .page-detail .page-two .in-date {
+    padding-left: 10px;
+
+    .css-1at62qq {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  }
+
+  .c-detail .page-detail .page-two .in-date p {
+      font-size: 14px;
+      padding-left: 8px;
+    }
+
+ }

@@ -12,7 +12,7 @@ body {
   -ms-user-select: none;
   user-select: none;
   font-family: 'Roboto', sans-serif;
-  /* background-color: #f0f3f5; */
+  background-color: #f0f3f5;
 }
 
 code {

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import "./Register.scss";
-import {MdAccountCircle} from 'react-icons/md'
 import {useNavigate} from 'react-router-dom';
 import { Form, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import brand from '../../images/logo.png';
+import "./Register.scss";
 
 function Register() {
   const navigate = useNavigate();
@@ -106,7 +106,7 @@ function Register() {
                   Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: "Daftar akun berhasil",
+                    text: "Daftar akun berhasil",
                     showConfirmButton: false,
                     timer: 1500
                   }).then((result) => {
@@ -138,41 +138,58 @@ function Register() {
     }  
   }
 
-  return (
-    <div className="container pt-5">
-        <Form   onSubmit={(e) => handleSubmit(e)}>
-        <MdAccountCircle className="reg-icon" style={{color:"#046c91"}}/>
-        <h4>Daftar</h4>
+  return (<>
+    <div className="c-register">
+      <div className="page-reg">
+        <div className="p1-reg">
+          <img src={brand} alt="logo" width={400} style={{ cursor : "pointer" }}  onClick={() => navigate('/')}/>
+          <h4>Solusi untuk barang kamu yang tidak terpakai</h4>
+        </div>
+          <div className="p2-reg">
+            <Form  onSubmit={(e) => handleSubmit(e)}>
+            <h5>Daftar</h5>
 
-        <Form.Group  >
-          <Form.Control id="name" className="p-3 b-bottom-signup" type="text" placeholder="Nama"
-            onChange={(e) => userUpdate(e.target.value) }
-          />
-        </Form.Group>  
-        <Form.Group >
-          <Form.Control id="email" className="p-3 b-mid-signup " type="email" placeholder="Email" 
-            onChange={(e) => emailUpdate(e.target.value) } 
-          />
-        </Form.Group>
-        <Form.Group >
-          <Form.Control id="phone" className="p-3 b-mid-signup" type="number" placeholder="No. phone" 
-            onChange={(e) => phoneUpdate(e.target.value) }
-          />
-        </Form.Group>
-        <Form.Group className=" mb-4" >
-          <Form.Control id="password" className="mb-1 p-3 b-top-signup" type="password" placeholder="Kata Sandi" 
-            onChange={(e) => passwordUpdate(e.target.value) }
-          />
-          <p className="href" onClick={() => navigate('/masuk')}><u>Masuk</u> </p>
-        </Form.Group>
-        
-        <button className=" mb-1 p-2 btn-submit" type="submit">
-          {loading && <Spinner animation="border" variant="light" />}
-          {!loading && <span>Daftar</span>}
-        </button>
-        </Form>
+            <Form.Group  >
+              <Form.Control id="name" className="p-2 b-bottom-signup" type="text" placeholder="Nama"
+                autoComplete="none"
+                onChange={(e) => userUpdate(e.target.value) }
+              />
+            </Form.Group>  
+            <Form.Group >
+              <Form.Control id="email" className="p-2 b-mid-signup " type="email" placeholder="Email"
+                autoComplete="none" 
+                onChange={(e) => emailUpdate(e.target.value) } 
+              />
+            </Form.Group>
+            <Form.Group >
+              <Form.Control id="phone" className="p-2 b-mid-signup" type="number" placeholder="No. telepon" 
+                autoComplete="none"
+                onChange={(e) => phoneUpdate(e.target.value) }
+              />
+            </Form.Group>
+            <Form.Group className=" mb-4" >
+              <Form.Control id="password" className="mb-1 p-2 b-top-signup" type="password" placeholder="Kata Sandi" 
+                onChange={(e) => passwordUpdate(e.target.value) }
+              />
+            </Form.Group>
+            
+            <button id="btn-daftar" className=" mb-1 p-2 btn-submit" type="submit">
+              {loading && <Spinner animation="border" variant="light" />}
+              {!loading && <span>Daftar</span>}
+            </button>
+            <div className="f-form">
+              <span>Sudah punya akun ? </span><p className="href" onClick={() => navigate('/masuk')}>Masuk</p>
+            </div>
+            </Form>
+          </div>
+        </div>
     </div>
-  );
+    <div className="cf-reglog">
+      <div className="f-reglog">
+        <span>© Rentz.ID 2022 Hak Cipta Dilindungi </span><span>|</span><span>Rentz.ID Care </span>
+      </div>
+    </div>
+  </>);
 }
 
 export default Register;

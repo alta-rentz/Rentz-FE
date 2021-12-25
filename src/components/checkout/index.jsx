@@ -1,4 +1,4 @@
-import { Modal, Button } from 'react-bootstrap';
+import { Spinner, Button } from 'react-bootstrap';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './checkout.scss';
@@ -14,18 +14,19 @@ import { useLocation } from 'react-router-dom';
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation()
-  const { from } = location.state
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const { from } = location.state;
   const [phone] = useState('');
-  const [payment, setPayment] = useState('')
+  const [payment, setPayment] = useState('');
+  const [alert, setAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const toRupiah = (money) => {
+    return new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(money);
+  }
 
   const handleMethod = (set) => {
     setPayment(set);
   }
-
-  console.log(from);
 
    const headers = {
     "Content-type": "application/json; charset=UTF-8",
@@ -39,10 +40,16 @@ const Checkout = () => {
 
   const handleSubmit = (e) => {
    e.preventDefault()
-    console.log(checkoutObj);
+   setLoading(true)
+
+   if (payment.length === 0){
+      setAlert(true);
+      setLoading(false);
+   }else{
+
    axios.post('https://rentz-id.site/jwt/checkout', checkoutObj, {headers : headers})
     .then(({data}) => {
-      console.log(data);
+      setLoading(false);
 
       if(payment === 'cod'){
         Swal.fire({
@@ -60,17 +67,16 @@ const Checkout = () => {
         icon: 'success',
         text: "Silahkan Konfirmasi Pembayaran",
         showConfirmButton: false,
-        timer: 1500
+        timer: 3000
       }).then(() => {
 
         if(payment === 'ID_DANA'){
-        window.open(`${data.payment.actions.desktop_web_checkout_url}`, '_blank');
+        window.open(`${data.payment.actions.desktop_web_checkout_url}`, "_self");
         } else if (payment === 'ID_SHOPEEPAY') {
-          window.open(`${data.payment.actions.mobile_deeplink_checkout_url}`, '_blank');
+          window.open(`${data.payment.actions.mobile_deeplink_checkout_url}`, "_self");
         }else if (payment === 'ID_LINKAJA'){
-        window.open(`${data.payment.actions.desktop_web_checkout_url}`, '_blank');
+        window.open(`${data.payment.actions.desktop_web_checkout_url}`, "_self");
         }
-        navigate('/keranjang');
       })
     }
       
@@ -84,6 +90,7 @@ const Checkout = () => {
         timer: 1500
       })
     })
+  }
 
   }
 
@@ -98,13 +105,15 @@ const Checkout = () => {
           <div className='checkout-body' >
           <div className='total-payment'>
             <p>Total Harga</p> 
-            <p>Rp. 250.000</p>
+            <p>{toRupiah(from.total)}</p>
           </div>
         </div>
         <div>
         <form >
           <div className='payment'>
             <h5>Metode Pembayaran</h5>
+            {alert && <p style={{ color: "red" }}>Pilih metode pembayaran di bawah</p>}
+            {!alert && <></>}
                 <div className='method'>
                   <input type="radio" name="method" id="cod"   onClick={() => handleMethod('cod')}/>
                   <label for="cod">COD ( Cash On Delivery )</label>
@@ -127,7 +136,8 @@ const Checkout = () => {
                   <label for="ovo"><img src={ovo} alt='ovo' width={40}/></label>
                 </div>
           </div>
-          <Button className='form-control mb-1' variant="success" type='submit' onClick={(e) => handleSubmit(e)}>Bayar</Button>
+          {loading && <Button className='form-control mb-1' variant="success" type='submit' onClick={(e) => handleSubmit(e)}><Spinner animation="border"/></Button>}
+          {!loading && <Button className='form-control mb-1' variant="success" type='submit' onClick={(e) => handleSubmit(e)}>Bayar</Button>}
           <Button className='form-control' variant="danger" onClick={() => navigate('/keranjang')}>Batalkan</Button>
           </form>
         </div>

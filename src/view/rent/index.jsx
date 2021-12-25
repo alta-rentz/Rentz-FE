@@ -33,9 +33,6 @@ const Rent = () => {
   const trim = nameProduct.trim();
   const indexOf = nameProduct.indexOf(trim[0]);
   const sliceName = nameProduct.slice(0, indexOf);
-  // const trimDesc = desc.trim();
-  // const indexOfDesc = desc.indexOf(trimDesc[0]);
-  // const sliceDesc = desc.slice(0, indexOfDesc);
 
   useEffect(() => {
     tokenUpdate(localStorage.getItem("token"));
@@ -116,7 +113,7 @@ const Rent = () => {
     }
 
     const formData = new FormData();
-    formData.append("name" , nameProduct.trim())
+    formData.append("name" , nameProduct.trim().toLocaleUpperCase())
     formData.append("subcategory_id" , category)
     formData.append("city_id" , city)
     formData.append("price" , price)
