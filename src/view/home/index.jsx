@@ -6,11 +6,14 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom';
-import baner1 from '../../images/baner1.jpeg';
-import baner2 from '../../images/baner2.jpeg';
+import banner from '../../images/banner.png';
 import defaultImage from '../../images/no-image.png';
-import { RiArrowRightSLine } from 'react-icons/ri'
+import { RiArrowRightSLine } from 'react-icons/ri';
 import Slider from "react-slick";
+import Category1 from '../../components/category-elektronik';
+import Category2 from '../../components/category-prabotan';
+import Category3 from '../../components/category-olahraga';
+import Category4 from '../../components/category-camping';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -30,6 +33,15 @@ const Home = () => {
       return name
     }
   }
+
+  // const searchFilter = (e, filter) => {
+
+  //   for(let i=0; i < filter.length)
+  //   if(filter){
+
+  //   }
+
+  // }
   
 
   const settings = {
@@ -41,9 +53,10 @@ const Home = () => {
   };
 
   useEffect(()=>{
- 
+  window.scrollTo(0, 0);
   axios.get('https://rentz-id.site/products')
   .then(({data}) => {
+    console.log(data);
     setTimeout(() => {
     updateList(data)
   }, 500)
@@ -57,7 +70,7 @@ const handleLoad = () => {
   setLoading(true);
   setTimeout(() => {
     setLoading(false);
-    updateLimit(limit + 10);
+    updateLimit(limit + 12);
     // window.scrollTo(0,document.body.scrollHeight);
   }, 500);
 }
@@ -69,7 +82,7 @@ if (list === null) return (<>
   <div className='page-carousel'>
     <div className='card-loading loading'></div>
   </div>
-  <div className="category-home">
+  {/* <div className="category-home">
     <h5>KATEGORI :</h5>
     <Dropdown>
       <Dropdown.Toggle className="dropdown-home" id="dropdown-basic">
@@ -82,7 +95,7 @@ if (list === null) return (<>
         <Dropdown.Item href="#/action-3">Hobi & Olahraga</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  </div>
+  </div> */}
   <div className="page-list">
     <div className='title-loading loading'></div>
     <div className="card-home">
@@ -105,13 +118,13 @@ if( list.data.length <= limit ){
     load.style.display = "none";
 }
 
+const dataPopular = list.data.filter((el, i) => el.ID < 12) ;
+
 const sortList = list.data.sort((a, b) => b.ID - a.ID);
 
 const data = sortList.filter((el, i) => i  < limit);
 
-console.log(sortList);
-
-console.log(list.data);
+console.log(dataPopular);
 
   return (
     <>
@@ -123,22 +136,15 @@ console.log(list.data);
           {...(true ? { timeout: 1000 } : {})}
               >
         <div className='page-carousel'>
-          <Carousel fade>
-          <Carousel.Item interval={5000}>
+          {/* <Carousel fade>
+          <Carousel.Item interval={5000}> */}
             <img
               className="d-block w-100"
-              src={baner1}
+              src={banner}
               alt="First slide"
             />
-          </Carousel.Item>
-          <Carousel.Item interval={5000}>
-            <img
-              className="d-block w-100"
-              src={baner2}
-              alt="Second slide"
-            />
-          </Carousel.Item>
-        </Carousel>
+          {/* </Carousel.Item>
+        </Carousel> */}
         </div>
         </Fade>
 
@@ -146,48 +152,10 @@ console.log(list.data);
           <div className='p-all'>
             <h6>KATEGORI PILIHAN</h6>
             <div className='c-box'>
-              <div className='c1'>
-                <div className='c-in1'></div>
-                <div className='c-text'>
-                <h5>Kamera</h5>
-                </div>
-              </div>
-              <div className='c1'>
-              <div className='c-in2'></div>
-                <div className='c-text'>
-                <h5>Laptop dan Komputer</h5>
-                </div>
-              </div>
-              <div className='c1'>
-              <div className='c-in3'></div>
-                <div className='c-text'>
-                <h5>Peralatan Rumah Tangga</h5>
-                </div>
-              </div>
-              <div className='c1'>
-              <div className='c-in4'></div>
-                <div className='c-text'>
-                  <h5>Playstation</h5>
-                </div>
-              </div>
-              <div className='c1'>
-              <div className='c-in4'></div>
-                <div className='c-text'>
-                  <h5>Playstation</h5>
-                </div>
-              </div>
-              <div className='c1'>
-              <div className='c-in4'></div>
-                <div className='c-text'>
-                  <h5>Playstation</h5>
-                </div>
-              </div>
-              <div className='c1'>
-              <div className='c-in4'></div>
-                <div className='c-text'>
-                  <h5>Playstation</h5>
-                </div>
-              </div>
+                <Category1 />
+                <Category2 />
+                <Category3 /> 
+                <Category4 />  
             </div>
           </div>
         </div>
@@ -199,18 +167,18 @@ console.log(list.data);
           </div>
           <div className='p-kategori'>
           <Slider {...settings}>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
-          <div className='c-img'></div>
+            {dataPopular.map((el, i) => 
+          <div className='c-img-kat' onClick={() => navigate(`/detail/${el.ID}`)} id={el.Name+i} key={i}>
+            <div className='img-kat'>
+              <img src={el.Url} alt={el.ID} />
+            </div>
+            <div className='text-kat'>
+                  <p>{toRupiah(el.Price)}</p>
+                  <p>{nameProduct(el.Name)}</p>
+                </div>
+          </div>
+          )}
+          
         </Slider>
           </div>
         </div>

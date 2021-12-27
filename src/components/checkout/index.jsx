@@ -38,6 +38,11 @@ const Checkout = () => {
       "checkout_method" : payment
     }
 
+    const checkoutOvo = {
+      "booking_id" : from.id_product,
+      "phone" : '+628123123123'
+    }
+
   const handleSubmit = (e) => {
    e.preventDefault()
    setLoading(true)
@@ -46,6 +51,21 @@ const Checkout = () => {
       setAlert(true);
       setLoading(false);
    }else{
+
+    if(payment === 'OVO') {
+      axios.post('https://rentz-id.site/jwt/checkout/ovo', checkoutOvo, {headers : headers})
+      .then(({data}) => {
+        setLoading(false);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          text: "Pembayaran dengan OVO berhasil",
+          showConfirmButton: true
+        }).then(() => {
+          navigate('/keranjang');
+        })
+      })
+    }else{
 
    axios.post('https://rentz-id.site/jwt/checkout', checkoutObj, {headers : headers})
     .then(({data}) => {
@@ -56,8 +76,7 @@ const Checkout = () => {
           position: 'center',
           icon: 'success',
           text: "Pembayaran Cash On Delivery",
-          showConfirmButton: false,
-          timer: 1500
+          showConfirmButton: true
         }).then(() => {
           navigate('/keranjang');
         })
@@ -90,6 +109,7 @@ const Checkout = () => {
         timer: 1500
       })
     })
+  }
   }
 
   }
@@ -132,7 +152,7 @@ const Checkout = () => {
                   <label for="linkaja"><img src={linkaja} alt='linkaja' width={40}/></label>
                 </div>
                 <div className='method'>
-                  <input type="radio" name="method" id="ovo"  onClick={() => handleMethod({phone})} />
+                  <input type="radio" name="method" id="ovo"  onClick={() => handleMethod('OVO')} />
                   <label for="ovo"><img src={ovo} alt='ovo' width={40}/></label>
                 </div>
           </div>

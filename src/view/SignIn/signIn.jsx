@@ -86,7 +86,7 @@ function SignIn() {
               <h5>Masuk</h5>
               <Form.Group >
                 <Form.Control id="email" className="p-2 b-mid-signup " type="email" placeholder="Email" 
-                  autoComplete="none"
+                  autoComplete="off"
                   onChange={(e) => emailUpdate(e.target.value) }
                 />
               </Form.Group>

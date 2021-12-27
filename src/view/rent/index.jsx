@@ -278,9 +278,27 @@ const Rent = () => {
         </div>
         <div className="form-right">
         <Form.Group className=" mb-4" >
-          <Form.Select className="mb-1 p-3" onChange={(e) => cityUpdate(e.target.value)}>
+          <Form.Select className="mb-1 p-3" onChange={(e) => cityUpdate(e.target.value)} Size="1">
             <option style={{ backgroundColor : "#b4b4b4" }} >Kota pemilik *</option>
+            <option value="1171">Kota Aceh</option>
+            <option value="1276">Kota Binjai</option>
+            <option value="3271">Kota Bogor</option>
+            <option value="3275">Kota Bekasi</option>
             <option value="3273">Kota Bandung</option>
+            <option value="5171">Kota Denpasar</option>
+            <option value="3173">Kota Jakarta</option>
+            <option value="1571">Kota Jambi</option>
+            <option value="1275">Kota Medan</option>
+            <option value="3573">Kota Malang</option>
+            <option value="1371">Kota Padang</option>
+            <option value="1371">Kota Pekanbaru</option>
+            <option value="1671">Kota Palembang</option>
+            <option value="3375">Kota Pekalongan</option>
+            <option value="3374">Kota Semarang</option>
+            <option value="3578">Kota Surabaya</option>
+            <option value="3278">Kota Tasikmalaya</option>
+            <option value="3674">Kota Tanggerang</option>
+            <option value="3471">Kota Yogyakarta</option>  
           </Form.Select>
           {alertCity && <div className='alerts'>Kota tidak boleh kosong.</div>}
           {!alertCity && <></>}

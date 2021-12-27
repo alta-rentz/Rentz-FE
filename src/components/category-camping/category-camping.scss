@@ -1,0 +1,82 @@
+.body-cat {
+
+  .modal-body {
+    width: 500px!important;
+  }
+}
+
+.custom-dialog {
+  width: 900px!important;
+}
+
+.p-cat {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.c-sub {
+  display: flex;
+  width: 210px;
+  height: 100px;
+  margin: 12px;
+  box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px 0px;
+  cursor: pointer;
+
+  .img-camping {
+    width: 50%;
+    background-image: url('../../images/tenda.png');
+    background-position: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
+  }
+
+  .img-camping2 {
+    width: 50%;
+    background-image: url('../../images/sleeping-bag.png');
+    background-position: center;
+    background-size: 80px;
+    background-repeat: no-repeat;
+  }
+
+  .img-camping3 {
+    width: 50%;
+    background-image: url('../../images/carrier.png');
+    background-position: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
+  }
+
+  .img-camping4 {
+    width: 50%;
+    background-image: url('../../images/sepatu.png');
+    background-position: center;
+    background-size: 80px;
+    background-repeat: no-repeat;
+  }
+
+  .img-camping5 {
+    width: 50%;
+    background-image: url('../../images/senter.png');
+    background-position: center;
+    background-size: 80px;
+    background-repeat: no-repeat;
+  }
+
+  .img-camping6 {
+    width: 50%;
+    background-image: url('../../images/matras.png');
+    background-position: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    font-weight: bold;
+  }
+}

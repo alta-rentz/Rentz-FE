@@ -12,6 +12,7 @@ import Cart from './view/cart';
 import Product from './view/product';
 import Rent from './view/rent';
 import Checkout from './components/checkout';
+import History from './view/histori';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
     <Route path="/checkout" element={<Checkout />}/>
     <Route path="/produk" element={<Product />}/>
     <Route path="/tambah_produk" element={<Rent />}/>
+    <Route path="/histori-pembayaran" element={<History />}/>
     </Routes>
   </BrowserRouter>
   )

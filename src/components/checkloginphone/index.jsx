@@ -25,7 +25,7 @@ const CheckLogin = () => {
         <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>
-           <p className='check'>Harap masuk terlebih dahulu... <u onClick={() => navigate(`/masuk/${pathName}`)}>Masuk</u> atau <u onClick={() => navigate(`/daftar/${pathName}`)}>Daftar</u></p>
+           <p className='check'>Harap masuk terlebih dahulu... <u onClick={() => navigate(`/masuk/${pathName}`)} id="masuk2">Masuk</u> atau <u onClick={() => navigate(`/daftar/${pathName}`)} id="daftar2">Daftar</u></p>
         </Modal.Body>
       </Modal>
     </>

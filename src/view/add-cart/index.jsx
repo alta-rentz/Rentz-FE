@@ -1,11 +1,10 @@
 import { Modal, Button } from 'react-bootstrap';
 import './add-cart.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TiShoppingCart } from 'react-icons/ti';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Detail from '../detail';
 
 const AddCart = (data) => {
   const navigate = useNavigate();
@@ -13,6 +12,7 @@ const AddCart = (data) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [done, updateDone] = useState(false);
+  const [cart, setCart] = useState(null)
   let locationPathName = window.location.pathname;
   let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
 
@@ -25,6 +25,20 @@ const headers = {
   "Authorization": 'Bearer ' + localStorage.getItem("token")
 };
 
+useEffect(() => {
+   
+  axios.get('https://rentz-id.site/jwt/cart', {headers : headers} )
+  .then(({data}) => {
+    setCart(data.data)
+  }).catch((err) => {
+    
+  })
+
+
+},[])
+
+
+
   const objInput = {
     "product_id" : +pathName,
     "time_in" : data.time_in,
@@ -32,47 +46,115 @@ const headers = {
     "qty" : 1
   }
 
-  console.log(objInput);
+  const handleAddData = () => {
+
+      axios.post(`https://rentz-id.site/jwt/booking`,objInput, {headers: headers} )
+      .then(({data}) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: "Tambahkan ke keranjang berhasil",
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          navigate(`/detail/${pathName}`);
+          updateDone(true)
+          handleClose(false)
+        });
+        
+      }).catch((err) => {
+        console.log(err.response.data.message);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          text: err.response.data.message,
+          showConfirmButton: true,
+          timer: 1500
+        }).then(() => {
+          handleClose(false)
+        })
+      })
+  }
+
+  if(cart === null){return (<>
+    <Button onClick={handleShow} id="rent-cartNull">
+      Rental
+    </Button>
+
+    <Modal
+    show={show}
+    onHide={handleClose}
+    backdrop="static"
+    keyboard={false}
+  >
+    <Modal.Header closeButton>
+      <Modal.Title><TiShoppingCart size="25px"/>Tambahkan ke keranjang </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+        <div className='body-one'>
+          <p>Nama Produk</p>
+          <p>Harga</p>
+          <p>Jumlah Hari</p>
+        </div>
+        <div className='body-two'>
+        <p>{data.name_product}</p>
+        <p>{toRupiah(data.price)}</p>
+        <p>x {data.amountDay} Hari</p>
+        </div>
+    </Modal.Body>
+    <Modal.Footer>
+        <p>Total Harga</p> 
+      <p>{toRupiah(data.price*data.amountDay)}</p>
+        <Button className='form-control' id="add-cart" variant="success" onClick={() => handleAddData()}>Tambahkan</Button>
+    </Modal.Footer>
+  </Modal>
+</>)}
+
 
   const handleAdd = () => {
-    axios.post(`https://rentz-id.site/jwt/booking`,objInput, {headers: headers} )
-    .then(({data}) => {
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: "Tambahkan ke keranjang berhasil",
-        showConfirmButton: false,
-        timer: 1500
-      }).then(() => {
-        navigate(`/detail/${pathName}`);
-        updateDone(true)
-        handleClose(false)
-      });
-      
-    }).catch((err) => {
-      console.log(err.response.data.message);
+
+    if(cart.length > 5){
       Swal.fire({
         position: 'center',
         icon: 'error',
-        text: err.response.data.message,
+        text: 'Keranjang kamu melebihi kapasitas',
         showConfirmButton: true,
-        timer: 1500
       }).then(() => {
         handleClose(false)
       })
-    })
+    }else{
+      axios.post(`https://rentz-id.site/jwt/booking`,objInput, {headers: headers} )
+      .then(({data}) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: "Tambahkan ke keranjang berhasil",
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          navigate(`/detail/${pathName}`);
+          updateDone(true)
+          handleClose(false)
+        });
+        
+      }).catch((err) => {
+        console.log(err.response.data.message);
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          text: err.response.data.message,
+          showConfirmButton: true,
+          timer: 1500
+        }).then(() => {
+          handleClose(false)
+        })
+      })
+    }
   }
-
-  
 
   return (
     <>
-      {/* <div className='d-none'>
-      {done && <Detail d={true} />}
-      {!done && <></>}
-      </div> */}
-      
-      <Button onClick={handleShow}>
+      <Button onClick={handleShow} id="rent">
         Rental
       </Button>
 

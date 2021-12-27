@@ -2,8 +2,9 @@ import { Modal, Button } from 'react-bootstrap';
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './checkLogin.scss';
+import { TiShoppingCart } from 'react-icons/ti';
 
-const CheckLogin = () => {
+const CheckLoginCart = () => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -13,9 +14,9 @@ const CheckLogin = () => {
 
   return(
     <>
-     <Button onClick={handleShow} id="rent-notlogin">
-        Rental
-      </Button>
+     <p onClick={handleShow}>
+        <TiShoppingCart />
+      </p>
 
       <Modal
         show={show}
@@ -26,11 +27,11 @@ const CheckLogin = () => {
         <Modal.Header closeButton>
         </Modal.Header>
         <Modal.Body>
-           <p className='check'>Harap masuk terlebih dahulu... <u onClick={() => navigate(`/masuk/${pathName}`)} id="masuk1">Masuk</u> atau <u onClick={() => navigate(`/daftar/${pathName}`)} id="daftar1">Daftar</u></p>
+           <p className='check'>Harap masuk terlebih dahulu... <u onClick={() => navigate(`/masuk`)}>Masuk</u> atau <u onClick={() => navigate(`/daftar/${pathName}`)}>Daftar</u></p>
         </Modal.Body>
       </Modal>
     </>
   )
 }
 
-export default CheckLogin;
+export default CheckLoginCart;

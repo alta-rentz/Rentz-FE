@@ -31,7 +31,7 @@ const Product = () => {
       setLoading(true)
     })
 
-  })
+  },[])
 
   
   if (list === undefined){
@@ -39,19 +39,24 @@ const Product = () => {
     <>
     <Navbar />
       <div className='c-product'>
-      <div className='page-product'>
+      <div className='navbar-product'>
         <div className='title-product'>
           <div className='title-left'>
-            <h5><BsBoxSeam /><span style={{ marginLeft : "5px" }}> Produk Saya</span> </h5>
-            <div className='underline-title-product'></div>
+            <p><BsBoxSeam /></p>
+            <span className='line-title-product'></span>
+            <h5> Produk Saya</h5>
           </div>
           <div className='title-rigth'>
             <button onClick={() => navigate('/tambah_produk')}>Tambah</button>
           </div>
         </div>
-           <div className='loading-product'>
-             {loading && <p>Product Kosong</p>}
-           {!loading && <Spinner animation="border"/>}
+      </div>
+      <div className='page-product'>
+        <div className='loading-product'>
+          <div className='empty-product'>
+            {loading && <p>Product Kosong</p>}
+            {!loading && <Spinner animation="border"/>}
+          </div>
         </div>
       </div>
     </div>
@@ -65,16 +70,19 @@ const Product = () => {
     <>
     <Navbar />
     <div className='c-product'>
-      <div className='page-product'>
+      <div className='navbar-product'>
         <div className='title-product'>
           <div className='title-left'>
-            <h5><BsBoxSeam /><span style={{ marginLeft : "5px" }}> Produk Saya</span> </h5>
-            <div className='underline-title-product'></div>
+            <p><BsBoxSeam /></p>
+            <span className='line-title-product'></span>
+            <h5> Produk Saya</h5>
           </div>
           <div className='title-rigth'>
             <button onClick={() => navigate('/tambah_produk')}>Tambah</button>
           </div>
         </div>
+      </div>
+      <div className='page-product'>
         {sortList.map((el, i) => 
         <div className='card-product' key={i}>
           <div className='item-product'>

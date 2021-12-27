@@ -3,8 +3,7 @@ import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
 import { useState, useEffect } from 'react';
 import { TiShoppingCart } from 'react-icons/ti';
-import { RiDeleteBinLine } from 'react-icons/ri'
-import img from "../../images/kamera1.jpg";
+import { RiDeleteBinLine } from 'react-icons/ri';
 import axios from 'axios';
 import { useNavigate, Link  } from 'react-router-dom';
 import { Spinner } from 'react-bootstrap';
@@ -26,10 +25,10 @@ const Cart = ({ navigation }) => {
   }
 
   useEffect(() => {
-   
+    window.scrollTo(0, 0);
     axios.get('https://rentz-id.site/jwt/cart', {headers : headers} )
     .then(({data}) => {
-      updateCartList(data)
+      updateCartList(data);
     }).catch((err) => {
       setLoading(true)
     })
@@ -39,7 +38,6 @@ const Cart = ({ navigation }) => {
 
   const handleChange = (e, total) => {
     
-    console.log(total);
     if(e.target.checked){
       updatePay([...pay, +e.target.value]);
       setTotalPay(totalPay+total)
@@ -65,32 +63,37 @@ const Cart = ({ navigation }) => {
     total      : totalPay
   }
 
-  console.log('ini total bayar' +totalPay);
   if(cartList === null) {
     return(<>
       <Navbar />
       <div className='c-cart'>
-      <div className='page-cart'>
-        <div className='title-cart'>
+    <div className='navbar-cart'>
+    <div className='title-cart'>
           <div className='title-left'>
-            <h5><TiShoppingCart /> Keranjang</h5>
-            <div className='underline-title'></div>
+            <div className='tl'><p><TiShoppingCart /></p> <span className='line-title'></span> <h5>Keranjang Saya</h5> </div>
           </div>
           <div className='title-rigth'>
-            {activePay && <button>Bayar</button>} 
-            {!activePay && <span  className='btn-checkout' style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Bayar</span>}
+            <div className='t-payment'><h5>Total :</h5><h5>{toRupiah(totalPay)}</h5></div>
+            {activePay &&  <Link className='btn-checkout' to='/checkout' state={{ from: checkout }}>Checkout</Link>}
+            {!activePay && <span  className='btn-checkout' style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Checkout</span>}
           </div>
         </div>
-        <div style={{
+          </div>
+      <div className='page-cart'>
+        
+      <div style={{
            display : "flex", 
            justifyContent : "center",
-           alignItems : "center",
-           height :"660px",
+           padding : "20px",
+           border : "1px solid rgba(0, 0, 0, 0.09)",
+           height :"80px",
            color : "#046c91",
+           fontSize: "20px"
         }}> 
           {loading && <p>Keranjang Kosong</p>}
           {!loading && <Spinner animation="border"/>}
         </div>
+        
         
       </div>
     </div>
@@ -138,33 +141,35 @@ const Cart = ({ navigation }) => {
     
   }
 
-  console.log(totalPay);
-  
   return (
     <>
     <Navbar />
     <div className='c-cart'>
-      <div className='page-cart'>
-        <div className='title-cart'>
+    <div className='navbar-cart'>
+    <div className='title-cart'>
           <div className='title-left'>
-            <h5><TiShoppingCart /> Keranjang</h5>
-            <div className='underline-title'></div>
+            <div className='tl'><p><TiShoppingCart /></p> <span className='line-title'></span> <h5>Keranjang Saya</h5> </div>
           </div>
           <div className='title-rigth'>
-            {activePay &&  <Link className='btn-checkout' to='/checkout' state={{ from: checkout }}>Bayar</Link>}
-            {!activePay && <span  className='btn-checkout' style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Bayar</span>}
+            <div className='t-payment'><h5>Total :</h5><h5>{toRupiah(totalPay)}</h5></div>
+            {activePay &&  <Link className='btn-checkout' to='/checkout' state={{ from: checkout }}>Checkout</Link>}
+            {!activePay && <span  className='btn-checkout' style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Checkout</span>}
           </div>
         </div>
+          </div>
+      <div className='page-cart'>
+        
+       
         {sortList.map((el, i) =>
         <div className='card-cart' key={i}>
           <div className='item-cart'>
-            <img src={el.Photos} alt="" width="150px"/>
+            <img src={el.Photos} alt={i} />
             <div className='item-info'>
             <p>{el.Name}</p>
             <p>{toRupiah(el.Price)} x {el.Total_Day} Hari</p>
-            <p>{toRupiah(el.Total)}</p>
             </div>
           </div>
+          <div className='total-pay'><p>{toRupiah(el.Total)}</p></div>
           <div className='pay'>
             <p id="d_product" onClick={() => handleDelete(el.ID)}><RiDeleteBinLine/></p>
             <label className="container-checkbox">

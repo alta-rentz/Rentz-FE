@@ -20,13 +20,12 @@
 }
 
 .body-two {
-  p:nth-child(2) {
+  p{
     text-align: right;
   }
-
+  
   p:nth-child(3) {
     margin: 0;
-    text-align: right;
   }
 }
 

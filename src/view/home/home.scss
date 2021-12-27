@@ -14,7 +14,7 @@
     .card-loading {
       overflow: hidden;
       width: 1280px;
-      height: 450px;
+      height: 302px;
       border-radius: 8px;
     }
 
@@ -23,8 +23,7 @@
       padding: 20px 10px;
 
       img {
-        height: 302px;
-        border-radius: 8px;
+        height: 303px;
       }
     }
 
@@ -87,6 +86,7 @@
       border-radius: 6px;
       box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
       cursor: pointer;
+      overflow: hidden;
 
       .img-products {
         height: 70%;
@@ -252,25 +252,25 @@
 
             .c-in1 {
               width: 50%;
-              background-image: url('../../images/kamera.png');
+              background-image: url('../../images/elektronik.png');
               background-position: center;
-              background-size: 80px;
+              background-size: 120px;
               background-repeat: no-repeat;
 
             }
 
             .c-in2 {
               width: 50%;
-              background-image: url('../../images/laptop.png');
+              background-image: url('../../images/perabotan.png');
               background-position: center;
-              background-size: 100px;
+              background-size: 150px;
               background-repeat: no-repeat;
 
             }
 
             .c-in3 {
-              width: 50%;
-              background-image: url('../../images/vacum.png');
+              width: 45%;
+              background-image: url('../../images/olahraga.png');
               background-position: center;
               background-size: 90px;
               background-repeat: no-repeat;
@@ -278,10 +278,10 @@
             }
 
             .c-in4 {
-              width: 50%;
-              background-image: url('../../images/ps.png');
+              width: 45%;
+              background-image: url('../../images/camping.png');
               background-position: center;
-              background-size: 120px;
+              background-size: 75px;
               background-repeat: no-repeat;
 
             }
@@ -332,7 +332,7 @@
 
     .p-kategori {
       width: 100%;
-      padding: 10px;
+      padding: 5px 10px;
 
       .slick-next {
         right: 0px!important;
@@ -363,12 +363,42 @@
     }
   }
 
-  .c-img {
+  .c-img-kat {
+    display: flex;
+    align-items: center;
     width: 210px!important;
     height: 290px;
     margin-left: 0px;
     background-color: #ffffff;
     box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+    cursor: pointer;
+
+    .img-kat {
+      display: flex;
+      height: 70%;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .text-kat {
+    background-color: #ffffff;
+    height: 30%;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    color: grey;
+    border-top: 1px solid #e4e1e1;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    font-size: 14px;
+
+    p:first-child {
+      font-size: 18px;
+      color: rgb(39, 39, 39);
+    }
+  }
   }
 
 
@@ -595,6 +625,14 @@
 
   .c-img {
     width: 185px!important;
+  }
+
+  .c-img-kat {
+    width: 185px!important;
+  }
+
+  .c-home .page-home .card-loading {
+    width: 1130px;
   }
 
  }

@@ -37,19 +37,43 @@ const Detail = (data) => {
   let locationPathName = window.location.pathname;
   let pathName = locationPathName.substring(locationPathName.lastIndexOf('/') + 1);
 
-  console.log(data.d);
   function getWeeksAfter(date, amount) {
     return date ? addWeeks(date, amount) : undefined;
   }
-  // function filterWeekends(date) {
-  //   // Return false if Saturday or Sunday
-  //   return (
-  //     date.getDate() < 28 && date.getDate() > 24 && date.getMonth() + 1 === 1 
-  //   )
-  // }
 
   const toRupiah = (money) => {
     return new Intl.NumberFormat("id-ID", {style: "currency", currency: "IDR", minimumFractionDigits: 0}).format(money);
+  }
+
+  const setMonth = (month) => {
+    let result = ""
+
+    if(month === 12){
+      result = "Des";
+    }else if ( month === 11){
+      result = "Nov";
+    }else if ( month === 10){
+      result = "Okt";
+    }else if ( month === 9){
+      result = "Sept";
+    }else if ( month === 8){
+      result = "Agu";
+    }else if ( month === 7){
+      result = "Jul";
+    }else if ( month === 6){
+      result = "Jun";
+    }else if ( month === 5){
+      result = "Mei";
+    }else if ( month === 4){
+      result = "Apr";
+    }else if ( month === 3){
+      result = "Mar";
+    }else if ( month === 2){
+      result = "Feb";
+    }else if ( month === 1){
+      result = "Jan";
+    }
+    return result;
   }
   
   useEffect(() => {
@@ -138,6 +162,18 @@ const Detail = (data) => {
   if(detail === null) {
     return (<div style={{ height : "100vh" }}></div>)
   }
+  
+  const setGuarantee = detail.Guarantee.map((el, i) => el + ' dan ' );
+  const createUser = new Date(detail.CreatedAt);
+
+  const guarantee = (arrGuarantee) => {
+
+      if (arrGuarantee.length === 1){
+        return arrGuarantee[0].slice(0, 3);
+      }else {
+        return arrGuarantee[0] + arrGuarantee[1].slice(0, 3);
+      }
+  }
 
   return (
     <>
@@ -165,13 +201,7 @@ const Detail = (data) => {
           <div className='info-desc'>
           <h5>Deskripsi Barang</h5>
           <p>Persyaratan untuk merental produk ini :</p>
-          <p>
-            {detail.Guarantee.map((el, i) => 
-            <span key={i}>
-             {` ${el} / `} 
-            </span>
-            )}
-          </p>
+          <p>{guarantee(setGuarantee)}</p>
           </div>
         </div>
         <div className='page-two'>
@@ -182,17 +212,17 @@ const Detail = (data) => {
             <div className='c-one'>
               <h4>{toRupiah(detail.Price)} / hari</h4>
               <p>{detail.Name}</p>
-              <p>Medan, Sumatra Utara, Indonesia</p>
+              <p>{detail.City_Name}</p>
             </div>
             <div className='c-two'>
 
               {rentButton && <>
-                {isLogin && < AddCart {...add_cart} />}
+                {isLogin && < AddCart {...add_cart}  />}
                 {!isLogin && <CheckLogin />}
                 </>}
               {!rentButton && <>
-                {isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Rental</button>}
-                {!isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Rental</button>}
+                {isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }} id="rent2-login">Rental</button>}
+                {!isLogin && <button style={{ backgroundColor : "grey", cursor : "not-allowed" }} id="rent2-notlogin">Rental</button>}
                 </>}
             </div>
           </div>
@@ -225,7 +255,7 @@ const Detail = (data) => {
               <p><FaUserCircle style={{ color : "grey" }}/></p>
               <div className='text-user'>
                 <p>{detail.Nama}</p>
-                <p><i>Bergabung sejak Jan 2020</i></p>
+                <p><i>Bergabung sejak {setMonth(createUser.getMonth() + 1)} {createUser.getFullYear()}</i></p>
                 {isPhone && <p><ImPhone/> {detail.Phone_Number}</p>}
                 {!isPhone && <p><ImPhone/> 08**-****-**** <span className='show-phone' ><u>< CheckLoginPhone/></u></span></p> }
                 

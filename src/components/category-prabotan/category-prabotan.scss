@@ -1,0 +1,82 @@
+.body-cat {
+
+  .modal-body {
+    width: 500px!important;
+  }
+}
+
+.custom-dialog {
+  width: 900px!important;
+}
+
+.p-cat {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.c-sub {
+  display: flex;
+  width: 210px;
+  height: 100px;
+  margin: 12px;
+  box-shadow: rgb(49 53 59 / 12%) 0px 1px 6px 0px;
+  cursor: pointer;
+
+  .img-prabotan {
+    width: 50%;
+    background-image: url('../../images/vacum.png');
+    background-position: center;
+    background-size: 80px;
+    background-repeat: no-repeat;
+  }
+
+  .img-prabotan2 {
+    width: 50%;
+    background-image: url('../../images/mesin-kopi.png');
+    background-position: center;
+    background-size: 80px;
+    background-repeat: no-repeat;
+  }
+
+  .img-prabotan3 {
+    width: 50%;
+    background-image: url('../../images/air-fryer.png');
+    background-position: center;
+    background-size: 60px;
+    background-repeat: no-repeat;
+  }
+
+  .img-prabotan4 {
+    width: 50%;
+    background-image: url('../../images/oven.png');
+    background-position: center;
+    background-size: 90px;
+    background-repeat: no-repeat;
+  }
+
+  .img-prabotan5 {
+    width: 50%;
+    background-image: url('../../images/mixer.png');
+    background-position: center;
+    background-size: 100px;
+    background-repeat: no-repeat;
+  }
+
+  .img-prabotan6 {
+    width: 50%;
+    background-image: url('../../images/blender.png');
+    background-position: center;
+    background-size: 80px;
+    background-repeat: no-repeat;
+  }
+
+  .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    font-weight: bold;
+  }
+}
