@@ -2,10 +2,11 @@ import './home.scss';
 import Navbar from '../../components/navbar';
 import Footer from '../../components/footer';
 import { Dropdown, Button, Spinner, Carousel } from 'react-bootstrap';
-import axios from "axios";
 import { useEffect, useState } from 'react';
 import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import allStore from "../../store/actions";
 import banner from '../../images/banner.png';
 import defaultImage from '../../images/no-image.png';
 import { RiArrowRightSLine } from 'react-icons/ri';
@@ -17,8 +18,10 @@ import Category4 from '../../components/category-camping';
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const data = useSelector(({listPost}) => listPost);
   const [list, updateList]    = useState(null);
-  const [limit, updateLimit]  = useState(12);
+  const [limit, updateLimit]  = useState(8);
   const [loading, setLoading] = useState(false);
   const [skeletonCard] = useState([1,2,3,4,5,6,7,8,9,10,11,12]);
 
@@ -42,35 +45,31 @@ const Home = () => {
   //   }
 
   // }
-  
 
   const settings = {
     dots: false,
     infinite: false,
+    lazyLoad: true,
     speed: 500,
-    slidesToShow: 6,
-    slidesToScroll: 6
+    slidesToShow: 5,
+    slidesToScroll: 5
   };
 
-  useEffect(()=>{
-  window.scrollTo(0, 0);
-  axios.get('https://rentz-id.site/products')
-  .then(({data}) => {
-    console.log(data);
-    setTimeout(() => {
-    updateList(data)
-  }, 500)
-  }).catch((err) => {
-    console.log(err);
-  })
-}, [updateList]);
+  useEffect(() => {
+    dispatch(allStore.fetchPost())
+  }, [dispatch]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    updateList(data);
+  },[data])
 
 const handleLoad = () => {
 
   setLoading(true);
   setTimeout(() => {
     setLoading(false);
-    updateLimit(limit + 12);
+    updateLimit(limit + 8);
     // window.scrollTo(0,document.body.scrollHeight);
   }, 500);
 }
@@ -82,20 +81,7 @@ if (list === null) return (<>
   <div className='page-carousel'>
     <div className='card-loading loading'></div>
   </div>
-  {/* <div className="category-home">
-    <h5>KATEGORI :</h5>
-    <Dropdown>
-      <Dropdown.Toggle className="dropdown-home" id="dropdown-basic">
-        Pilihan Kategori ... 
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu className='dropdown-kategori' align="end">
-        <Dropdown.Item href="#/action-1">Elektronik</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Rumah Tangga</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Hobi & Olahraga</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
-  </div> */}
+ 
   <div className="page-list">
     <div className='title-loading loading'></div>
     <div className="card-home">
@@ -112,19 +98,50 @@ if (list === null) return (<>
   </div>
   </div></>);
 
+
+ 
+
+if( list.length <= limit ){
+  return (<>
+    <Navbar/>
+<div className="c-home">
+<div className="page-home">
+  <div className='page-carousel'>
+    <div className='card-loading loading'></div>
+  </div>
+ 
+  <div className="page-list">
+    <div className='title-loading loading'></div>
+    <div className="card-home">
+      {skeletonCard.map((el, i) => 
+      <div className="cards" key={i} >
+        <div className='img-products-loading loading'></div>
+        <div className='name-product-loading'>
+          <p></p>
+        </div>
+      </div>
+      )}
+    </div>
+  </div>
+  </div>
+  </div>
+  </>)
+}
+
+
 const load = document.getElementById("load");
 
 if( list.data.length <= limit ){
-    load.style.display = "none";
+   load.style.display = "none";
 }
 
-const dataPopular = list.data.filter((el, i) => el.ID < 12) ;
 
 const sortList = list.data.sort((a, b) => b.ID - a.ID);
 
-const data = sortList.filter((el, i) => i  < limit);
+const filter = sortList.filter((el, i) => i  < limit);
 
-console.log(dataPopular);
+
+const popular = list.data.filter((el, i) => i > 10 && i < 20);
 
   return (
     <>
@@ -163,18 +180,18 @@ console.log(dataPopular);
         <div className='c-kategori mt-5'>
           <div className='h-category'>
             <h6>BARANG POPULER</h6>
-            <h6>Lihat Semua <RiArrowRightSLine/> </h6>
           </div>
           <div className='p-kategori'>
           <Slider {...settings}>
-            {dataPopular.map((el, i) => 
-          <div className='c-img-kat' onClick={() => navigate(`/detail/${el.ID}`)} id={el.Name+i} key={i}>
+            {popular.map((elm, i) => 
+          <div className='c-img-kat' onClick={() => navigate(`/detail/${elm.ID}`)} id={'bp'+i} key={i}>
             <div className='img-kat'>
-              <img src={el.Url} alt={el.ID} />
+              <img src={elm.Url} alt={elm.ID} />
             </div>
             <div className='text-kat'>
-                  <p>{toRupiah(el.Price)}</p>
-                  <p>{nameProduct(el.Name)}</p>
+                  <p>{toRupiah(elm.Price)}</p>
+                  <p>{nameProduct(elm.Name)}</p>
+                  <p>{elm.City_Name}</p>
                 </div>
           </div>
           )}
@@ -189,12 +206,12 @@ console.log(dataPopular);
           <h6>SEMUA KATEGORI</h6>
           <div className="card-home">
           
-            {data.map((el, i) => 
+            {filter.map((el, i) => 
               <Fade  in={true} key={i}
               style={{ transformOrigin: '0 0 0' }}
           {...(true ? { timeout: 1000 } : {})}
               >
-              <div className="cards" loading="lazy" onClick={() => navigate(`/detail/${el.ID}`)} id={el.Name+i}>
+              <div className="cards" loading="lazy" onClick={() => navigate(`/detail/${el.ID}`)} id={i}>
                 <div className='img-products'
                   style={{ 
                     display : "flex",
@@ -206,6 +223,7 @@ console.log(dataPopular);
                 <div className='name-product'>
                   <p>{toRupiah(el.Price)}</p>
                   <p>{nameProduct(el.Name)}</p>
+                  <p>{el.City_Name}</p>
                 </div>
               </div>
               </Fade >
@@ -217,7 +235,7 @@ console.log(dataPopular);
               <Spinner animation="grow"  style={{ color : "#046C91" }} size="sm" className='ms-1 me-1'/>
               <Spinner animation="grow"  style={{ color : "#046C91" }} size="sm"/>
             </div>}
-            {!loading && <div className="load" ><Button onClick={() => handleLoad()} className='btn-load'>Muat lainnya...</Button></div>}
+            {!loading && <div className="load" ><Button  id="muat" onClick={() => handleLoad()} className='btn-load'>Muat lainnya...</Button></div>}
           </div>    
         </div>
       </div>

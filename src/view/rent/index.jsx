@@ -204,7 +204,7 @@ const Rent = () => {
           <div className='form-one'>
           <div className='form-left'>
         <Form.Group  >
-          <Form.Control id="name_product" className="p-3 b-bottom-signup" type="text" placeholder="Nama Produk *"
+          <Form.Control id="name_product" autoComplete='off' className="p-3 b-bottom-signup" type="text" placeholder="Nama Produk *"
             onChange={(e) =>  {nameProductUpdate(e.target.value); setAlertName(false); setAlertName2(false)}}
           />
            {alertName && <p className='alerts'>Nama produk tidak boleh kosong.</p>}
@@ -214,14 +214,14 @@ const Rent = () => {
         </Form.Group>  
        
         <Form.Group >
-          <Form.Control id="price_product" className="p-3" type="number" placeholder="Harga Rental *" 
+          <Form.Control id="price_product" autoComplete='off' className="p-3" type="number" placeholder="Harga Rental *" 
             onChange={(e) => priceUpdate(e.target.value) } 
           />
           {alertPrice && <p className='alerts'>Harga rental tidak boleh kosong.</p>}
           {!alertPrice && <></>}
         </Form.Group>
         <Form.Group >
-          <Form.Control id="stock_product" className="p-3" type="number" placeholder="Stok Produk *" 
+          <Form.Control id="stock_product" autoComplete='off' className="p-3" type="number" placeholder="Stok Produk *" 
             onChange={(e) => stockUpdate(e.target.value) }
           />
           {alertStock && <p className='alerts'>Stok produk tidak boleh kosong.</p>}
@@ -251,7 +251,7 @@ const Rent = () => {
         </Form.Group>
 
         <Form.Group className=" mb-4 photo" >
-          <Form.Label className='label-foto'>Pilih foto produk *</Form.Label>
+          <Form.Label className='label-foto'>Pilih foto produk ( max 5 foto ) *</Form.Label>
           <Form.Control id="photo_product" className="mb-1 p-3 input-foto" type="file" 
              onChange={(e) => handlePhoto(e) }
           />
@@ -307,7 +307,29 @@ const Rent = () => {
         <Form.Group className=" mb-4" >
         <Form.Select className="mb-1 p-3" onChange={(e) => categoryUpdate(e.target.value)}>
             <option style={{ backgroundColor : "#b4b4b4" }} >Kategori produk *</option>
-            <option value="311">Lain-lain</option>
+            <option value="101">Laptop</option>
+            <option value="102">Komputer</option>
+            <option value="107">Kamera</option>
+            <option value="103">Playstation</option>
+            <option value="104">Drone</option>
+            <option value="201">Vacum Cleaner</option>
+            <option value="202">Mesin Kopi</option>
+            <option value="203">Air Fryer</option>
+            <option value="204">Oven</option>
+            <option value="205">Mixer</option>
+            <option value="206">Blender</option>
+            <option value="301">Sepatu</option>
+            <option value="304">Tenda</option>
+            <option value="305">Sleeping Bag</option>
+            <option value="308">Carrier</option>
+            <option value="310">Senter</option>
+            <option value="306">Matras</option>
+            <option value="401">Karpet Yoga</option>
+            <option value="402">Bola Yoga</option>
+            <option value="407">Bola Sepak</option>
+            <option value="408">Bola Volly</option>
+            <option value="406">Skipping Jump</option>
+            <option value="404">Kacamata Renang</option>
           </Form.Select>
           {alertCategory && <div className='alerts'>Kategori tidak boleh kosong.</div>}
           {!alertCategory && <></>}

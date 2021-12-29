@@ -156,9 +156,9 @@ const Checkout = () => {
                   <label for="ovo"><img src={ovo} alt='ovo' width={40}/></label>
                 </div>
           </div>
-          {loading && <Button className='form-control mb-1' variant="success" type='submit' onClick={(e) => handleSubmit(e)}><Spinner animation="border"/></Button>}
-          {!loading && <Button className='form-control mb-1' variant="success" type='submit' onClick={(e) => handleSubmit(e)}>Bayar</Button>}
-          <Button className='form-control' variant="danger" onClick={() => navigate('/keranjang')}>Batalkan</Button>
+          {loading && <Button id="pay-loading" className='form-control mb-1' variant="success" type='submit' onClick={(e) => handleSubmit(e)}><Spinner animation="border"/></Button>}
+          {!loading && <Button id="pay" className='form-control mb-1' variant="success" type='submit' onClick={(e) => handleSubmit(e)}>Bayar</Button>}
+          <Button id="cancel-pay" className='form-control' variant="danger" onClick={() => navigate('/keranjang')}>Batalkan</Button>
           </form>
         </div>
         </div>

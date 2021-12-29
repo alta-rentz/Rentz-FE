@@ -56,7 +56,14 @@ function Register() {
           text: 'Nomor HP tidak boleh kosong',
         }).then(() => { setLoading(false); })
       }else{
-        if ( phone.length < 11 || phone[0] !== "0" || phone[1] !== "8") {
+        if ( phone.length < 11 || phone.length > 12 ) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            text: 'Nomor HP tidak sesuai',
+          }).then(() => { setLoading(false); })
+      }else{
+        if ( phone[0] !== "0" || phone[1] !== "8") {
           Swal.fire({
             position: 'center',
             icon: 'error',
@@ -107,8 +114,7 @@ function Register() {
                     position: 'center',
                     icon: 'success',
                     text: "Daftar akun berhasil",
-                    showConfirmButton: false,
-                    timer: 1500
+                    showConfirmButton: true
                   }).then((result) => {
                     if(locationPathName === `/daftar/${pathName}`){
                       navigate(`/detail/${pathName}`)
@@ -127,7 +133,7 @@ function Register() {
             }).finally(() => {
               setLoading(false);
             });
-
+          }
           }
           }
           }

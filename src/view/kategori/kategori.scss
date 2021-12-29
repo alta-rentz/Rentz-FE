@@ -1,0 +1,140 @@
+.c-ks {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 50px;
+
+  .page-ks {
+    width: 1280px;
+
+    .page-list-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+
+    .page-list{
+      margin-top: 100px;
+
+      h6 {
+        font-weight: bold;
+      }
+      
+      .title-loading {
+        width: 150px;
+        height: 25px;
+        margin-left: 10px;
+      }
+
+    .card-home {
+      display: flex;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      width: 1400px;
+      overflow: hidden;
+
+    .cards {
+     
+      width: 299px;
+      height: 320px;
+      border: 1px solid #e4e1e1;
+      margin: 10px 0px;
+      margin-right: 28px;
+      border-radius: 6px;
+      box-shadow: rgb(0 0 0 / 10%) 0px 0.0625rem 0.125rem 0px;
+      cursor: pointer;
+      overflow: hidden;
+
+      .img-products {
+        height: 70%;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background-color: #ffffff;
+
+        img {
+          width : 100%;
+        }
+
+      }
+
+      .img-products-loading {
+        height: 200px;
+      }
+
+      .name-product{
+        background-color: #ffffff;
+        height: 30%;
+        padding: 10px;
+        text-align: left;
+        font-weight: bold;
+        color: grey;
+        border-top: 1px solid #e4e1e1;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+        font-size: 14px;
+
+        p:first-child {
+          margin: 0;
+          font-size: 18px;
+          color: rgb(39, 39, 39);
+        }
+
+        p:nth-child(3){
+          font-size: 10px;
+          text-align: right;
+        }
+      }
+      
+      .name-product-loading{
+        height: 50px;
+        padding-top: 10px;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 6px;
+      }
+    }
+
+    
+  }
+
+  .load {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    
+
+    .btn-load {
+      border: 1px solid #000530;
+      background-color: #ffffff;
+      color: #000530;
+      font-weight: bold;
+    }
+
+    .btn-load:hover {
+      border: 3px solid;
+      padding: 0 10px;
+    }
+  }
+}
+
+  }
+}
+
+// --------------------- responsive to Desktop ----------------------
+
+@media (min-width: 992px) and (max-width: 1600px) {    
+
+  .c-ks .page-ks {
+    width: 1130px;
+  }
+
+  .c-ks .page-ks .page-list .card-home {
+    width: 1200px;
+  }
+
+  .c-ks .page-ks .page-list .card-home .cards {
+    width: 262px;
+  }
+
+}

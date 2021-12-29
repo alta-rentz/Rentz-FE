@@ -46,11 +46,13 @@ function SignIn() {
                   localStorage.setItem("userName", data.data.Nama);
                   localStorage.setItem("email", data.data.Email);
                   Swal.fire({
+                    inputAttributes: {
+                      id: "txt-note",
+                    },
                     position: 'center',
                     icon: 'success',
                     text: "Anda telah login",
-                    showConfirmButton: false,
-                    timer: 1500
+                    showConfirmButton: true
                   }).then((result) => {
                     if(locationPathName === `/masuk/${pathName}`){
                       navigate(`/detail/${pathName}`)

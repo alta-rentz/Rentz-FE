@@ -65,7 +65,6 @@ const History = () => {
         
       </div>
     </div>
-    <Footer />
     </>)
   }
 
@@ -103,7 +102,6 @@ const History = () => {
         
       </div>
     </div>
-    <Footer />
     </>
   )
 }

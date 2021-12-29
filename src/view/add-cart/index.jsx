@@ -99,7 +99,7 @@ useEffect(() => {
         <div className='body-two'>
         <p>{data.name_product}</p>
         <p>{toRupiah(data.price)}</p>
-        <p>x {data.amountDay} Hari</p>
+        <p>x {(data.amountDay - 1)} Hari</p>
         </div>
     </Modal.Body>
     <Modal.Footer>

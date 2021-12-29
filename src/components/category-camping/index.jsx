@@ -1,8 +1,10 @@
 import { Modal } from 'react-bootstrap';
 import './category-camping.scss';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CategoryCamping = () => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -32,27 +34,27 @@ const CategoryCamping = () => {
     <div className='body-cat'>
     <Modal.Body>
       <div className='p-cat'>
-        <div className='c-sub'>
+        <div className='c-sub' onClick={() => navigate('kategori/304')}>
           <div className='img-camping'></div>
           <div className='text'>Tenda</div>
         </div>
-        <div className='c-sub'>
+        <div className='c-sub' onClick={() => navigate('kategori/305')}>
           <div className='img-camping2'></div>
           <div className='text'>Sleeping Bag</div>
         </div>
-        <div className='c-sub'>
+        <div className='c-sub' onClick={() => navigate('kategori/308')}>
           <div className='img-camping3'></div>
           <div className='text'>Carrier</div>
         </div>
-        <div className='c-sub'>
+        <div className='c-sub' onClick={() => navigate('kategori/301')}>
           <div className='img-camping4'></div>
           <div className='text'>Sepatu</div>
         </div>
-        <div className='c-sub'>
+        <div className='c-sub' onClick={() => navigate('kategori/310')}>
           <div className='img-camping5'></div>
           <div className='text'>Senter</div>
         </div>
-        <div className='c-sub'>
+        <div className='c-sub' onClick={() => navigate('kategori/306')}>
           <div className='img-camping6'></div>
           <div className='text'>Matras</div>
         </div>

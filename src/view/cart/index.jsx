@@ -97,7 +97,6 @@ const Cart = ({ navigation }) => {
         
       </div>
     </div>
-    <Footer />
     </>)
   }
 
@@ -152,8 +151,8 @@ const Cart = ({ navigation }) => {
           </div>
           <div className='title-rigth'>
             <div className='t-payment'><h5>Total :</h5><h5>{toRupiah(totalPay)}</h5></div>
-            {activePay &&  <Link className='btn-checkout' to='/checkout' state={{ from: checkout }}>Checkout</Link>}
-            {!activePay && <span  className='btn-checkout' style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Checkout</span>}
+            {activePay &&  <Link id="checkout" className='btn-checkout' to='/checkout' state={{ from: checkout }}>Checkout</Link>}
+            {!activePay && <span id="not-checkout" className='btn-checkout' style={{ backgroundColor : "grey", cursor : "not-allowed" }}>Checkout</span>}
           </div>
         </div>
           </div>
@@ -174,7 +173,7 @@ const Cart = ({ navigation }) => {
             <p id="d_product" onClick={() => handleDelete(el.ID)}><RiDeleteBinLine/></p>
             <label className="container-checkbox">
               <input type="checkbox" value={el.ID} onClick={(e, total) => handleChange(e,  el.Total)}/>
-              <span className="checkmark"></span>
+              <span className="checkmark" id={i}></span>
             </label>
           </div>
         </div>
@@ -182,7 +181,6 @@ const Cart = ({ navigation }) => {
         
       </div>
     </div>
-    <Footer />
     </>
   )
 }

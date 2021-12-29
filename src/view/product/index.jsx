@@ -60,7 +60,6 @@ const Product = () => {
         </div>
       </div>
     </div>
-    <Footer />
     </>)
   }
 
@@ -103,7 +102,6 @@ const Product = () => {
         
       </div>
     </div>
-    <Footer />
     </>
   )
 }

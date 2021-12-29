@@ -119,13 +119,13 @@ const Navbar = () => {
             </Dropdown.Menu>
             </Dropdown> */}
             {isLogin && 
-              <div className='navbar-cart' onClick={() => navigate('/keranjang')}> 
+              <div className='navbar-cart' id="cart-login" onClick={() => navigate('/keranjang')}> 
               <p style={{ color : "#c7d3e3" }}><TiShoppingCart /></p>
              </div>
             }
 
             {!isLogin && 
-              <div className='navbar-cart'  >
+              <div className='navbar-cart' id="cart-notLogin"  >
               <p style={{ color : "#c7d3e3" }}><CheckLogin /></p>
              </div>
             }
@@ -243,10 +243,19 @@ const Navbar = () => {
               <Dropdown.Item href="#/action-3">Jakarta</Dropdown.Item>
             </Dropdown.Menu>
             </Dropdown> */}
-            <div className='navbar-cart' onClick={() => navigate('/keranjang')}> 
+
+            {isLogin && 
+            <div className='navbar-cart' id="cart-login" onClick={() => navigate('/keranjang')}> 
              <p style={{ color : "#c7d3e3" }}><TiShoppingCart /></p>
              <div className='dot-cart'></div>
             </div>
+            }
+
+            {!isLogin && 
+            <div className='navbar-cart' id="cart-notLogin" onClick={() => navigate('/keranjang')}> 
+             <p style={{ color : "#c7d3e3" }}><TiShoppingCart /></p>
+            </div>
+            }
 
             <span className='location-phone' onClick={() => setlocationModal(true)}><ImLocation  style={{ color : "#c7d3e3" }} size={25}/></span> 
             <div className="user-icon">
